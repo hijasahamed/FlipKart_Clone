@@ -12,6 +12,7 @@ class Search extends StatelessWidget {
         decoration:  InputDecoration(
           enabledBorder: InputBorder.none,
           disabledBorder: InputBorder.none,
+          focusedBorder: InputBorder.none,
           filled: true,
           fillColor: Colors.white,
           hintText: 'Search for Products, Brands and Latest Launched', 

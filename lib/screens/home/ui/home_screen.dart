@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_bloc_tutorial_app/screens/cart/ui/cart_screen.dart';
 import 'package:flutter_bloc_tutorial_app/screens/home/bloc/home_bloc.dart';
+import 'package:flutter_bloc_tutorial_app/screens/home/ui/grid_count_screen.dart';
 import 'package:flutter_bloc_tutorial_app/screens/home/ui/product_tile_widget.dart';
 import 'package:flutter_bloc_tutorial_app/screens/home/ui/search_bar.dart';
 import 'package:flutter_bloc_tutorial_app/screens/wishlist/ui/wish_list_screen.dart';
@@ -95,6 +96,8 @@ class _HomeScreenState extends State<HomeScreen> {
                 child: SingleChildScrollView(
                   child: Column(
                     children: [
+                      const GridCountScreen(),
+                      const SizedBox(height: 5,),
                       GridView.builder(
                         scrollDirection: Axis.vertical,
                         shrinkWrap: true,
