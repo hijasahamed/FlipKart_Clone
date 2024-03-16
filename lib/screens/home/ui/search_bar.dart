@@ -18,7 +18,6 @@ class Search extends StatelessWidget {
           hintText: 'Search for Products, Brands and Latest Launched', 
           prefixIcon: const Icon(Icons.search,color: Colors.blue,),
           suffixIcon: InkWell(
-            splashColor: Colors.amber,
             onTap: () {
               
             },

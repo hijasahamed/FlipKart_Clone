@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_bloc_tutorial_app/api_service/api_service.dart';
 import 'package:flutter_bloc_tutorial_app/screens/cart/ui/cart_screen.dart';
 import 'package:flutter_bloc_tutorial_app/screens/home/bloc/home_bloc.dart';
-import 'package:flutter_bloc_tutorial_app/screens/home/ui/grid_count_screen.dart';
+import 'package:flutter_bloc_tutorial_app/screens/home/ui/api_grid.dart';
+import 'package:flutter_bloc_tutorial_app/screens/home/ui/carousel_slider_screen.dart';
 import 'package:flutter_bloc_tutorial_app/screens/home/ui/product_tile_widget.dart';
 import 'package:flutter_bloc_tutorial_app/screens/home/ui/search_bar.dart';
 import 'package:flutter_bloc_tutorial_app/screens/wishlist/ui/wish_list_screen.dart';
@@ -24,6 +26,7 @@ class _HomeScreenState extends State<HomeScreen> {
   final HomeBloc homeBloc = HomeBloc();
   @override
   Widget build(BuildContext context) {
+    getallproducts();
     return BlocConsumer<HomeBloc, HomeState>(
       bloc: homeBloc,
       listenWhen: (previous, current) => current is HomeActionState,
@@ -96,7 +99,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 child: SingleChildScrollView(
                   child: Column(
                     children: [
-                      const GridCountScreen(),
+                      const CarouselSliderScreen(),
                       const SizedBox(height: 5,),
                       GridView.builder(
                         scrollDirection: Axis.vertical,
@@ -132,6 +135,11 @@ class _HomeScreenState extends State<HomeScreen> {
                         productDataModel: successState.purchasedProducts[0],
                         value: true,
                       ),
+                      Container(
+                        height: 600,
+                        width: double.maxFinite,
+                        child: ApiGrid(homeBloc: homeBloc, value: successState)
+                      )
                     ],
                   ),
                 ),

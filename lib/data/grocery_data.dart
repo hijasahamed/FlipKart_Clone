@@ -10,7 +10,7 @@ class Grocerydata{
     },
     {
       "id":'2',
-      'name':'Watche',
+      'name':'Watch',
       'description':'Smart Watche Collections',
       'price':'3000',
       'imageUrl':'https://m.media-amazon.com/images/I/515BNisImJL.jpg'

@@ -4,9 +4,11 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 
 import 'package:flutter/foundation.dart';
+import 'package:flutter_bloc_tutorial_app/api_service/api_service.dart';
 
 import 'package:flutter_bloc_tutorial_app/data/grocery_data.dart';
 import 'package:flutter_bloc_tutorial_app/data/purchase_products.dart';
+import 'package:flutter_bloc_tutorial_app/screens/home/models/api_model.dart';
 
 import 'package:flutter_bloc_tutorial_app/screens/home/models/home_product_data_model.dart';
 
@@ -41,6 +43,9 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
 
     await Future.delayed(const Duration(milliseconds: 1800));
 
+    final values= await getallproducts();
+
+
     emit(
       HomeLoadedSuccessState(
         products: Grocerydata.groceryProduct.map((e) => ProductsDataModel(
@@ -49,12 +54,15 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
             description: e['description'],
             price: e['price'],
             imageUrl: e['imageUrl'])).toList(),
+
         purchasedProducts: PurchaseProducts.purchaseProducts.map((e) => ProductsDataModel(
           id: e['id'], 
           name: e['name'], 
           description: e['description'], 
           price: e['price'], 
-          imageUrl:  e['imageUrl'])).toList()
+          imageUrl:  e['imageUrl'])).toList(),
+
+        apiproducts: values
       )
     );
 

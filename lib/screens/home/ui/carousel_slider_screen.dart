@@ -1,8 +1,8 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 
-class GridCountScreen extends StatelessWidget {
-  const GridCountScreen({super.key});
+class CarouselSliderScreen extends StatelessWidget {
+  const CarouselSliderScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

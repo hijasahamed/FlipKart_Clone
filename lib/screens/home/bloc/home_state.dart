@@ -12,7 +12,8 @@ class HomeLoadingState extends HomeState{}
 class HomeLoadedSuccessState extends HomeState{
   final List<ProductsDataModel> products;
   final List<ProductsDataModel> purchasedProducts;
-  HomeLoadedSuccessState({required this.products,required this.purchasedProducts});
+  final List<ApiModel> apiproducts;
+  HomeLoadedSuccessState({required this.products,required this.purchasedProducts,required this.apiproducts});
 }
 
 class HomeErrorState extends HomeState{}
