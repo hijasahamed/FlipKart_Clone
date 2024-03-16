@@ -10,19 +10,22 @@ class ApiGrid extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GridView.builder(
+      scrollDirection: Axis.horizontal,
       shrinkWrap: true,
-      itemCount: value.apiproducts.length-1,
+      itemCount: value.apiproducts.length-5,
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
             childAspectRatio: 1,
             mainAxisSpacing: 5,
             crossAxisSpacing: 5,
-            crossAxisCount: 2), 
+            crossAxisCount: 1), 
       itemBuilder: ((context, index) {
         final val=value.apiproducts[index];
         return Container(
-          height: 100,
-          width: 150,
+          height: 75,
+          width: 100,
           decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(10),
+            border: Border.all(width: .5,color: Colors.brown,style: BorderStyle.solid),
             image: DecorationImage(
               fit: BoxFit.cover,
               image: NetworkImage(val.imageurl)

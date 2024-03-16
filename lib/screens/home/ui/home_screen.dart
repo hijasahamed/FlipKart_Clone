@@ -5,6 +5,7 @@ import 'package:flutter_bloc_tutorial_app/screens/cart/ui/cart_screen.dart';
 import 'package:flutter_bloc_tutorial_app/screens/home/bloc/home_bloc.dart';
 import 'package:flutter_bloc_tutorial_app/screens/home/ui/api_grid.dart';
 import 'package:flutter_bloc_tutorial_app/screens/home/ui/carousel_slider_screen.dart';
+import 'package:flutter_bloc_tutorial_app/screens/home/ui/lottie_screen.dart';
 import 'package:flutter_bloc_tutorial_app/screens/home/ui/product_tile_widget.dart';
 import 'package:flutter_bloc_tutorial_app/screens/home/ui/search_bar.dart';
 import 'package:flutter_bloc_tutorial_app/screens/wishlist/ui/wish_list_screen.dart';
@@ -102,7 +103,6 @@ class _HomeScreenState extends State<HomeScreen> {
                       const CarouselSliderScreen(),
                       const SizedBox(height: 5,),
                       GridView.builder(
-                        scrollDirection: Axis.vertical,
                         shrinkWrap: true,
                         gridDelegate:
                             const SliverGridDelegateWithFixedCrossAxisCount(
@@ -127,6 +127,9 @@ class _HomeScreenState extends State<HomeScreen> {
                         productDataModel: successState.purchasedProducts[2],
                         value: true,
                       ),
+                      const Divider(),
+                      const LottieWidgetScreen(),
+                      const Divider(),
                       ProductTileWidget(
                         productDataModel: successState.purchasedProducts[1],
                         value: true,
@@ -135,11 +138,12 @@ class _HomeScreenState extends State<HomeScreen> {
                         productDataModel: successState.purchasedProducts[0],
                         value: true,
                       ),
-                      Container(
-                        height: 600,
+                      
+                      SizedBox(
+                        height: 150,
                         width: double.maxFinite,
                         child: ApiGrid(homeBloc: homeBloc, value: successState)
-                      )
+                      ),
                     ],
                   ),
                 ),
