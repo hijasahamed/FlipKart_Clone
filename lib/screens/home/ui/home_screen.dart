@@ -3,9 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_bloc_tutorial_app/api_service/api_service.dart';
 import 'package:flutter_bloc_tutorial_app/screens/cart/ui/cart_screen.dart';
 import 'package:flutter_bloc_tutorial_app/screens/home/bloc/home_bloc.dart';
-import 'package:flutter_bloc_tutorial_app/screens/home/ui/api_grid.dart';
+import 'package:flutter_bloc_tutorial_app/screens/home/ui/cosmetic_widget.dart';
 import 'package:flutter_bloc_tutorial_app/screens/home/ui/carousel_slider_screen.dart';
-import 'package:flutter_bloc_tutorial_app/screens/home/ui/lottie_screen.dart';
+import 'package:flutter_bloc_tutorial_app/screens/home/ui/lottie_watch_screen.dart';
 import 'package:flutter_bloc_tutorial_app/screens/home/ui/product_tile_widget.dart';
 import 'package:flutter_bloc_tutorial_app/screens/home/ui/search_bar.dart';
 import 'package:flutter_bloc_tutorial_app/screens/wishlist/ui/wish_list_screen.dart';
@@ -27,7 +27,7 @@ class _HomeScreenState extends State<HomeScreen> {
   final HomeBloc homeBloc = HomeBloc();
   @override
   Widget build(BuildContext context) {
-    getallproducts();
+    getallproducts();    
     return BlocConsumer<HomeBloc, HomeState>(
       bloc: homeBloc,
       listenWhen: (previous, current) => current is HomeActionState,
@@ -60,6 +60,7 @@ class _HomeScreenState extends State<HomeScreen> {
             );
           case HomeLoadedSuccessState:
             final successState = state as HomeLoadedSuccessState;
+            final mediaQuerySize=MediaQuery.sizeOf(context);
             return Scaffold(
               backgroundColor: const Color.fromARGB(241, 255, 255, 255),
               appBar: AppBar(               
@@ -96,16 +97,18 @@ class _HomeScreenState extends State<HomeScreen> {
                 backgroundColor: Colors.yellow,
               ),
               body: Padding(
-                padding: const EdgeInsets.all(4),
+                padding:  const EdgeInsets.all(4),
                 child: SingleChildScrollView(
                   child: Column(
                     children: [
-                      const CarouselSliderScreen(),
-                      const SizedBox(height: 5,),
+                      Padding(
+                        padding: const EdgeInsets.only(bottom: 5),
+                        child: CarouselSliderScreen(size: mediaQuerySize),
+                      ),
                       GridView.builder(
                         shrinkWrap: true,
                         gridDelegate:
-                            const SliverGridDelegateWithFixedCrossAxisCount(
+                          const SliverGridDelegateWithFixedCrossAxisCount(
                           crossAxisCount: 4,
                           crossAxisSpacing: 1,
                           mainAxisSpacing: 1,
@@ -128,7 +131,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         value: true,
                       ),
                       const Divider(),
-                      const LottieWidgetScreen(),
+                      LottieWidgetScreen(size:mediaQuerySize),
                       const Divider(),
                       ProductTileWidget(
                         productDataModel: successState.purchasedProducts[1],
@@ -138,12 +141,42 @@ class _HomeScreenState extends State<HomeScreen> {
                         productDataModel: successState.purchasedProducts[0],
                         value: true,
                       ),
-                      
-                      SizedBox(
-                        height: 150,
-                        width: double.maxFinite,
-                        child: ApiGrid(homeBloc: homeBloc, value: successState)
+                      const Divider(),
+                      Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          border: Border.all(width: .5),
+                          color: const Color.fromARGB(255, 3, 28, 41),
+                          boxShadow: const [
+                            BoxShadow(
+                              color: Color.fromARGB(162, 83, 88, 4),
+                              spreadRadius: 5,
+                              blurRadius: 7,
+                              offset: Offset(0,1)
+                            )
+                          ]
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.only(left: 5,right: 0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const Padding(
+                                padding: EdgeInsets.only(top: 5,bottom: 5),
+                                child: ColoredBox(
+                                  color: Colors.lime,
+                                  child: Text(' Flat 20% Off for Cosmetics ',style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold,fontFamily: 'hijas'),)),
+                              ),
+                              SizedBox(
+                                height: mediaQuerySize.height/4.6,
+                                width: mediaQuerySize.width,
+                                child: CosmeticWidget(homeBloc: homeBloc, value: successState,size: mediaQuerySize,)
+                              ),
+                            ],
+                          ),
+                        ),
                       ),
+                      const Divider(),
                     ],
                   ),
                 ),

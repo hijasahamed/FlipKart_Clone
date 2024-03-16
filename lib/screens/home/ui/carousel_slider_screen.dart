@@ -2,15 +2,14 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 
 class CarouselSliderScreen extends StatelessWidget {
-  const CarouselSliderScreen({super.key});
+  final Size size;
+  const CarouselSliderScreen({super.key,required this.size});
 
   @override
   Widget build(BuildContext context) {
     return CarouselSlider(
         items:  [
           Container(
-            height: 100,
-            width: double.maxFinite,
             decoration: BoxDecoration(
               color: Colors.transparent,
               border: Border.all(width: .5,color: Colors.black),
@@ -22,8 +21,6 @@ class CarouselSliderScreen extends StatelessWidget {
             ),
           ),
           Container(
-            height: 100,
-            width: double.maxFinite,
             decoration: BoxDecoration(
               color: Colors.transparent,
               border: Border.all(width: .5,color: Colors.black),
@@ -35,8 +32,6 @@ class CarouselSliderScreen extends StatelessWidget {
             ),
           ),
           Container(
-            height: 100,
-            width: double.maxFinite,
             decoration: BoxDecoration(
               color: Colors.transparent,
               border: Border.all(width: .5,color: Colors.black),
@@ -49,10 +44,9 @@ class CarouselSliderScreen extends StatelessWidget {
           ),
         ],
         options: CarouselOptions(
-          height: 200.0,
+          height: size.height/4.8,
           enlargeCenterPage: true,
           autoPlay: true,
-          aspectRatio: 16 / 9,
           autoPlayCurve: Curves.fastOutSlowIn,
           enableInfiniteScroll: true,
           autoPlayAnimationDuration: const Duration(milliseconds: 900),
