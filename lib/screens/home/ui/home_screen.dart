@@ -3,11 +3,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_bloc_tutorial_app/api_service/api_service.dart';
 import 'package:flutter_bloc_tutorial_app/screens/cart/ui/cart_screen.dart';
 import 'package:flutter_bloc_tutorial_app/screens/home/bloc/home_bloc.dart';
+import 'package:flutter_bloc_tutorial_app/screens/home/ui/app_bar_screen.dart';
 import 'package:flutter_bloc_tutorial_app/screens/home/ui/cosmetic_widget.dart';
 import 'package:flutter_bloc_tutorial_app/screens/home/ui/carousel_slider_screen.dart';
 import 'package:flutter_bloc_tutorial_app/screens/home/ui/lottie_watch_screen.dart';
 import 'package:flutter_bloc_tutorial_app/screens/home/ui/product_tile_widget.dart';
-import 'package:flutter_bloc_tutorial_app/screens/home/ui/search_bar.dart';
 import 'package:flutter_bloc_tutorial_app/screens/wishlist/ui/wish_list_screen.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -46,6 +46,9 @@ class _HomeScreenState extends State<HomeScreen> {
                 builder: (context) => const WishlistScreen(),
               ));
         }
+        // else if (state is HomeNavigateToCosmeticSingleProductPageActionState){
+        //   Navigator.push(context,MaterialPageRoute(builder: (context) =>  SingleCosmeticProduct(homeBloc: homeBloc,),));
+        // }
       },
       builder: (context, state) {
         switch (state.runtimeType) {
@@ -63,39 +66,7 @@ class _HomeScreenState extends State<HomeScreen> {
             final mediaQuerySize=MediaQuery.sizeOf(context);
             return Scaffold(
               backgroundColor: const Color.fromARGB(241, 255, 255, 255),
-              appBar: AppBar(               
-                title: const Text(
-                  'Flopkart',
-                  style: TextStyle(
-                      fontSize: 25,
-                      fontStyle: FontStyle.italic,
-                      color: Colors.blue,
-                      fontWeight: FontWeight.w500),
-                ),
-                actions: [
-                  IconButton(
-                      onPressed: () {
-                        homeBloc.add(HomeWishlistNavigateEvent());
-                      },
-                      icon: const Icon(
-                        Icons.favorite,
-                        color: Colors.red,
-                      )),
-                  IconButton(
-                      onPressed: () {
-                        homeBloc.add(HomeCartNavigateEvent());
-                      },
-                      icon: const Icon(
-                        Icons.shopping_cart,
-                        color: Colors.blue,
-                      ))
-                ],
-                bottom: const PreferredSize(
-                  preferredSize: Size.fromHeight(60), 
-                  child: Search()
-                ),
-                backgroundColor: Colors.yellow,
-              ),
+              appBar: MyAppBar(homeBloc: homeBloc),
               body: Padding(
                 padding:  const EdgeInsets.all(4),
                 child: SingleChildScrollView(
@@ -146,15 +117,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10),
                           border: Border.all(width: .5),
-                          color: const Color.fromARGB(255, 3, 28, 41),
-                          boxShadow: const [
-                            BoxShadow(
-                              color: Color.fromARGB(162, 83, 88, 4),
-                              spreadRadius: 5,
-                              blurRadius: 7,
-                              offset: Offset(0,1)
-                            )
-                          ]
+                          color: Colors.black,                         
                         ),
                         child: Padding(
                           padding: const EdgeInsets.only(left: 5,right: 0),
@@ -163,9 +126,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             children: [
                               const Padding(
                                 padding: EdgeInsets.only(top: 5,bottom: 5),
-                                child: ColoredBox(
-                                  color: Colors.lime,
-                                  child: Text(' Flat 20% Off for Cosmetics ',style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold,fontFamily: 'hijas'),)),
+                                child: Text(' Flat 20% Off for Cosmetics ',style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold,fontFamily: 'hijas',color: Colors.white),), 
                               ),
                               SizedBox(
                                 height: mediaQuerySize.height/4.6,

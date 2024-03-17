@@ -33,6 +33,8 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
 
     on<HomeCartNavigateEvent>(homeCartNavigateEvent);
 
+    // on<HomeCosmeticSingleProductPageNavigateEvent>(homeCosmeticSingleProductPageNavigateEvent);
+
   }
 
 
@@ -119,6 +121,19 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     emit(HomeNavigateToCartPageActionState());
 
   }
+
+  // FutureOr<void> homeCosmeticSingleProductPageNavigateEvent(
+  //     HomeCosmeticSingleProductPageNavigateEvent event, Emitter<HomeState> emit) {
+
+  //   if (kDebugMode) {
+
+  //     print('Navigating to Cosmetic Single Screen');
+
+  //   }
+
+  //   emit(HomeNavigateToCosmeticSingleProductPageActionState());
+
+  // }
 
 }
 

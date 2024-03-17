@@ -20,3 +20,7 @@ class HomeWishlistNavigateEvent extends HomeEvent{
 class HomeCartNavigateEvent extends HomeEvent{
   
 }
+
+// class HomeCosmeticSingleProductPageNavigateEvent extends HomeEvent{
+
+// }
