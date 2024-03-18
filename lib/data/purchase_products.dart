@@ -28,5 +28,12 @@ class PurchaseProducts{
       'price':'₹800 onwards',
       'imageUrl':'https://1099554485.rsc.cdn77.org/upload/admin/category/1706856106_list_banner_mobile_Listing-shirt_M.jpg'
     },
+    {
+      "id":'5',
+      'name':'Latest Gadgets',
+      'description':'Offer sale',
+      'price':'₹10,000/-',
+      'imageUrl':'https://www.smsupermalls.com/data/uploads/2023/08/SM_Finds_Catch_the_most_epic_deals_at_the_Great_Gadget_Sale.jpg'
+    },
   ];
 }

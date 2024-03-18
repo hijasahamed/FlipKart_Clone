@@ -21,6 +21,7 @@ class HomeCartNavigateEvent extends HomeEvent{
   
 }
 
-// class HomeCosmeticSingleProductPageNavigateEvent extends HomeEvent{
-
-// }
+class HomeCosmeticSingleProductPageNavigateEvent extends HomeEvent{
+final ApiModel data;
+HomeCosmeticSingleProductPageNavigateEvent({required this.data});
+}

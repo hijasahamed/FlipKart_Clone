@@ -9,8 +9,10 @@ import 'package:flutter_bloc_tutorial_app/api_service/api_service.dart';
 import 'package:flutter_bloc_tutorial_app/data/grocery_data.dart';
 import 'package:flutter_bloc_tutorial_app/data/purchase_products.dart';
 import 'package:flutter_bloc_tutorial_app/screens/home/models/api_model.dart';
+import 'package:flutter_bloc_tutorial_app/screens/home/models/electro_maniac_model.dart';
 
 import 'package:flutter_bloc_tutorial_app/screens/home/models/home_product_data_model.dart';
+import 'package:flutter_bloc_tutorial_app/screens/home/ui/list_view_products.dart';
 
 import 'package:meta/meta.dart';
 
@@ -33,7 +35,9 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
 
     on<HomeCartNavigateEvent>(homeCartNavigateEvent);
 
-    // on<HomeCosmeticSingleProductPageNavigateEvent>(homeCosmeticSingleProductPageNavigateEvent);
+    on<HomeCosmeticSingleProductPageNavigateEvent>(homeCosmeticSingleProductPageNavigateEvent);
+
+  
 
   }
 
@@ -46,6 +50,9 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     await Future.delayed(const Duration(milliseconds: 1800));
 
     final values= await getallproducts();
+
+    final electroManiacValues= await electroManiaDataFetch();
+    
 
 
     emit(
@@ -64,7 +71,8 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
           price: e['price'], 
           imageUrl:  e['imageUrl'])).toList(),
 
-        apiproducts: values
+        apiproducts: values,
+        electroManiaProducts:electroManiacValues, 
       )
     );
 
@@ -122,18 +130,11 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
 
   }
 
-  // FutureOr<void> homeCosmeticSingleProductPageNavigateEvent(
-  //     HomeCosmeticSingleProductPageNavigateEvent event, Emitter<HomeState> emit) {
+ 
 
-  //   if (kDebugMode) {
 
-  //     print('Navigating to Cosmetic Single Screen');
-
-  //   }
-
-  //   emit(HomeNavigateToCosmeticSingleProductPageActionState());
-
-  // }
-
+  FutureOr<void> homeCosmeticSingleProductPageNavigateEvent(HomeCosmeticSingleProductPageNavigateEvent event, Emitter<HomeState> emit) {
+    emit(HomeNavigateToCosmeticSingleProductPageActionState(data: event.data));
+  }
 }
 

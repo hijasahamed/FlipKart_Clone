@@ -31,13 +31,7 @@ class CosmeticWidget extends StatelessWidget {
             children: [
               GestureDetector(
                 onTap: () {
-                  // homeBloc.add(HomeCosmeticSingleProductPageNavigateEvent());
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => SingleCosmeticProduct(
-                            homeBloc: homeBloc, value: val),
-                      ));
+                  homeBloc.add(HomeCosmeticSingleProductPageNavigateEvent(data: val));              
                 },
                 child: Container(
                   height: size.height / 7,
@@ -108,7 +102,7 @@ class SingleCosmeticProduct extends StatelessWidget {
   Widget build(BuildContext context) {
     final mediaQuerySize = MediaQuery.sizeOf(context);
     return Scaffold(
-      appBar: MyAppBar(homeBloc: homeBloc),
+      appBar: MyAppBar(homeBloc: homeBloc,buttonsOn: false),      
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(8.0),
@@ -127,7 +121,7 @@ class SingleCosmeticProduct extends StatelessWidget {
                           borderRadius: BorderRadius.circular(10),
                           image: DecorationImage(
                               image: NetworkImage(value.imageurl),
-                              fit: BoxFit.cover,
+                              fit: BoxFit.fill,
                               filterQuality: FilterQuality.high)),
                     ),
                   ),
@@ -140,13 +134,13 @@ class SingleCosmeticProduct extends StatelessWidget {
                           onPressed: (){
 
                           }, 
-                          icon: const Icon(Icons.favorite,color: Colors.red,size: 45,)
+                          icon: const Icon(Icons.favorite,color: Colors.red,size: 25,)
                         ),
                         IconButton(
                           onPressed: (){
 
                           }, 
-                          icon: const Icon(Icons.shopping_cart,color: Colors.grey,size: 45,)
+                          icon: const Icon(Icons.shopping_cart,color: Colors.blue,size: 25,)
                         ),
                       ],
                     )
@@ -186,6 +180,32 @@ class SingleCosmeticProduct extends StatelessWidget {
               Text(value.description.trimRight().trimLeft(),style: const TextStyle(fontWeight: FontWeight.bold,fontFamily: 'hijas'),)
             ],
           ),
+        ),
+      ),
+      bottomNavigationBar: BottomAppBar(
+        color: Colors.white,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            Container(
+              width: mediaQuerySize.width/2.5,
+              decoration: BoxDecoration(
+                border: Border.all(width: .5),
+                borderRadius: BorderRadius.circular(0),
+              ),
+              alignment: Alignment.center,
+              child: const Text('Add to Cart',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 15),),
+            ),
+            Container(
+              width: mediaQuerySize.width/2.5,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(0),
+                color: Colors.amber
+              ),
+              alignment: Alignment.center,
+              child: const Text('Buy Now',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 15),),
+            ),
+          ],
         ),
       ),
     );

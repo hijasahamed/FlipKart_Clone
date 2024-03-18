@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_bloc_tutorial_app/api_service/api_service.dart';
-import 'package:flutter_bloc_tutorial_app/screens/cart/ui/cart_screen.dart';
+import 'package:flutter_bloc_tutorial_app/screens/home/models/cart/ui/cart_screen.dart';
 import 'package:flutter_bloc_tutorial_app/screens/home/bloc/home_bloc.dart';
 import 'package:flutter_bloc_tutorial_app/screens/home/ui/app_bar_screen.dart';
 import 'package:flutter_bloc_tutorial_app/screens/home/ui/cosmetic_widget.dart';
@@ -9,6 +9,7 @@ import 'package:flutter_bloc_tutorial_app/screens/home/ui/carousel_slider_screen
 import 'package:flutter_bloc_tutorial_app/screens/home/ui/lottie_watch_screen.dart';
 import 'package:flutter_bloc_tutorial_app/screens/home/ui/product_tile_widget.dart';
 import 'package:flutter_bloc_tutorial_app/screens/wishlist/ui/wish_list_screen.dart';
+import 'package:lottie/lottie.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -27,7 +28,8 @@ class _HomeScreenState extends State<HomeScreen> {
   final HomeBloc homeBloc = HomeBloc();
   @override
   Widget build(BuildContext context) {
-    getallproducts();    
+    getallproducts(); 
+    electroManiaDataFetch();   
     return BlocConsumer<HomeBloc, HomeState>(
       bloc: homeBloc,
       listenWhen: (previous, current) => current is HomeActionState,
@@ -46,9 +48,9 @@ class _HomeScreenState extends State<HomeScreen> {
                 builder: (context) => const WishlistScreen(),
               ));
         }
-        // else if (state is HomeNavigateToCosmeticSingleProductPageActionState){
-        //   Navigator.push(context,MaterialPageRoute(builder: (context) =>  SingleCosmeticProduct(homeBloc: homeBloc,),));
-        // }
+        else if (state is HomeNavigateToCosmeticSingleProductPageActionState){
+          Navigator.push(context,MaterialPageRoute(builder: (context) =>  SingleCosmeticProduct(homeBloc: homeBloc,value: state.data),));
+        }
       },
       builder: (context, state) {
         switch (state.runtimeType) {
@@ -66,7 +68,7 @@ class _HomeScreenState extends State<HomeScreen> {
             final mediaQuerySize=MediaQuery.sizeOf(context);
             return Scaffold(
               backgroundColor: const Color.fromARGB(241, 255, 255, 255),
-              appBar: MyAppBar(homeBloc: homeBloc),
+              appBar: MyAppBar(homeBloc: homeBloc,buttonsOn: true),
               body: Padding(
                 padding:  const EdgeInsets.all(4),
                 child: SingleChildScrollView(
@@ -87,30 +89,43 @@ class _HomeScreenState extends State<HomeScreen> {
                         itemBuilder: (context, index) {
                           return ProductTileWidget(
                             productDataModel: successState.products[index],
-                            value: false,
+                            container: false,
+                            homeBloc: homeBloc,
                           );
                         },
                         itemCount: successState.products.length,
                       ),
                       const Divider(),
                       ProductTileWidget(
+                        productDataModel: successState.purchasedProducts[4], 
+                        container: true,
+                        isGadgets: true,
+                        homeBloc: homeBloc,
+                        size: mediaQuerySize,
+                        value: successState,
+                      ),
+                      ProductTileWidget(
                         productDataModel: successState.purchasedProducts[3],
-                        value: true,
+                        container: true,
+                        homeBloc: homeBloc,
                       ),
                       ProductTileWidget(
                         productDataModel: successState.purchasedProducts[2],
-                        value: true,
+                        container: true,
+                        homeBloc: homeBloc,
                       ),
                       const Divider(),
                       LottieWidgetScreen(size:mediaQuerySize),
                       const Divider(),
                       ProductTileWidget(
                         productDataModel: successState.purchasedProducts[1],
-                        value: true,
+                        container: true,
+                        homeBloc: homeBloc,
                       ),
                       ProductTileWidget(
                         productDataModel: successState.purchasedProducts[0],
-                        value: true,
+                        container: true,
+                        homeBloc: homeBloc,
                       ),
                       const Divider(),
                       Container(
@@ -124,9 +139,14 @@ class _HomeScreenState extends State<HomeScreen> {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              const Padding(
-                                padding: EdgeInsets.only(top: 5,bottom: 5),
-                                child: Text(' Flat 20% Off for Cosmetics ',style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold,fontFamily: 'hijas',color: Colors.white),), 
+                              Padding(
+                                padding: const EdgeInsets.only(top: 5,bottom: 5),
+                                child: Row(
+                                  children: [
+                                    const Text(' Flat 20% Off for Cosmetics ',style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold,fontFamily: 'hijas',color: Colors.white),),
+                                    LottieBuilder.asset('assets/animations/Animation - 1710669204067.json',height: mediaQuerySize.height/13,width: mediaQuerySize.width/6,)
+                                  ],
+                                ), 
                               ),
                               SizedBox(
                                 height: mediaQuerySize.height/4.6,

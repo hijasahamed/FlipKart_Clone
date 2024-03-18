@@ -3,8 +3,9 @@ import 'package:flutter_bloc_tutorial_app/screens/home/bloc/home_bloc.dart';
 import 'package:flutter_bloc_tutorial_app/screens/home/ui/search_bar.dart';
 
 class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
+  final bool buttonsOn;
   final HomeBloc homeBloc;
-  const MyAppBar({super.key, required this.homeBloc});
+  const MyAppBar({super.key, required this.homeBloc,required this.buttonsOn});
 
   @override
   Widget build(BuildContext context) {
@@ -19,15 +20,18 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
             fontWeight: FontWeight.w500),
       ),
       actions: [
-        IconButton(
-            onPressed: () {
-              homeBloc.add(HomeWishlistNavigateEvent());
-            },
-            icon: const Icon(
-              Icons.favorite,
-              color: Colors.red,
-            )),
-        IconButton(
+        buttonsOn?
+          Row(
+            children: [
+              IconButton(
+                onPressed: () {
+                  homeBloc.add(HomeWishlistNavigateEvent());
+                },
+                icon: const Icon(
+                  Icons.favorite,
+                  color: Colors.red,
+                )),
+                IconButton(
             onPressed: () {
               homeBloc.add(HomeCartNavigateEvent());
             },
@@ -35,6 +39,9 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
               Icons.shopping_cart,
               color: Colors.blue,
             ))
+            ],
+          )
+          : const SizedBox()       
       ],
       bottom: const PreferredSize(
           preferredSize: Size.fromHeight(60), child: Search()),
