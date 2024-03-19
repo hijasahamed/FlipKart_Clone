@@ -8,10 +8,10 @@ class ProductTileWidget extends StatelessWidget {
   final ProductsDataModel productDataModel;
   final bool container;
   final bool? isGadgets;
-  final Size? size;
+  final Size size;
   final HomeLoadedSuccessState? value;
   const ProductTileWidget(
-      {super.key, required this.productDataModel, required this.container,this.isGadgets,required this.homeBloc,this.size,this.value});
+      {super.key, required this.productDataModel, required this.container,this.isGadgets,required this.homeBloc,required this.size,this.value});
 
   @override
   Widget build(BuildContext context) {
@@ -53,8 +53,8 @@ class ProductTileWidget extends StatelessWidget {
           child: Column(           
               children: [
                 Container(
-                  height: 180,
-                  width: double.maxFinite,
+                  height: size.height/4.2,
+                  width: size.width,
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(5),
                       border: Border.all(

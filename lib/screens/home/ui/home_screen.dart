@@ -91,10 +91,13 @@ class _HomeScreenState extends State<HomeScreen> {
                             productDataModel: successState.products[index],
                             container: false,
                             homeBloc: homeBloc,
+                            size: mediaQuerySize,
                           );
                         },
                         itemCount: successState.products.length,
                       ),
+                      const Divider(),
+                      LottieWidgetScreen(size:mediaQuerySize),
                       const Divider(),
                       ProductTileWidget(
                         productDataModel: successState.purchasedProducts[4], 
@@ -108,24 +111,25 @@ class _HomeScreenState extends State<HomeScreen> {
                         productDataModel: successState.purchasedProducts[3],
                         container: true,
                         homeBloc: homeBloc,
+                        size: mediaQuerySize,
                       ),
                       ProductTileWidget(
                         productDataModel: successState.purchasedProducts[2],
                         container: true,
                         homeBloc: homeBloc,
+                        size: mediaQuerySize,
                       ),
-                      const Divider(),
-                      LottieWidgetScreen(size:mediaQuerySize),
-                      const Divider(),
                       ProductTileWidget(
                         productDataModel: successState.purchasedProducts[1],
                         container: true,
                         homeBloc: homeBloc,
+                        size: mediaQuerySize,
                       ),
                       ProductTileWidget(
                         productDataModel: successState.purchasedProducts[0],
                         container: true,
                         homeBloc: homeBloc,
+                        size: mediaQuerySize,
                       ),
                       const Divider(),
                       Container(

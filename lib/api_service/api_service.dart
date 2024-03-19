@@ -1,9 +1,9 @@
 import 'dart:convert';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc_tutorial_app/screens/home/models/electro_maniac_model.dart';
 import 'package:flutter_bloc_tutorial_app/screens/home/ui/list_view_products.dart';
 import 'package:http/http.dart' as http;
-
 import 'package:flutter_bloc_tutorial_app/screens/home/models/api_model.dart';
 
 Future<List<ApiModel>> getallproducts() async {
@@ -22,17 +22,15 @@ Future <List<ElectroManiacModel>> electroManiaDataFetch() async {
   List<ElectroManiacModel> res=[];
   try {
     const url = 'https://electromania.tech/products';
-
     final uri = Uri.parse(url);
     final respose = await http.get(uri);
     final item = jsonDecode(respose.body) as List;
       res=item.map((e) => ElectroManiacModel.fromjson(e)).toList();
-      hello(item);
-     print(res);
-   
-   
+      apiImageAccess(item);
   } catch (e) {
-    print(e);
+    if (kDebugMode) {
+      print(e);
+    }
   }
   return res;
 }

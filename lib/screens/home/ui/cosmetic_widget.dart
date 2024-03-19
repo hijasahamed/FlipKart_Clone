@@ -94,9 +94,9 @@ class CosmeticWidget extends StatelessWidget {
 
 class SingleCosmeticProduct extends StatelessWidget {
   final HomeBloc homeBloc;
-  final ApiModel value;
+  final ApiModel? value;
   const SingleCosmeticProduct(
-      {super.key, required this.homeBloc, required this.value});
+      {super.key, required this.homeBloc,  this.value});
 
   @override
   Widget build(BuildContext context) {
@@ -120,7 +120,7 @@ class SingleCosmeticProduct extends StatelessWidget {
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10),
                           image: DecorationImage(
-                              image: NetworkImage(value.imageurl),
+                              image: NetworkImage(value!.imageurl),
                               fit: BoxFit.fill,
                               filterQuality: FilterQuality.high)),
                     ),
@@ -147,13 +147,13 @@ class SingleCosmeticProduct extends StatelessWidget {
                   )
                 ],
               ),
-              Text(value.brand.toUpperCase(),style: const TextStyle(fontSize: 30,fontWeight: FontWeight.bold,fontFamily: 'hijas'),),
+              Text(value!.brand.toUpperCase(),style: const TextStyle(fontSize: 30,fontWeight: FontWeight.bold,fontFamily: 'hijas'),),
               const Divider(),
-              Text(value.name.toUpperCase(),style: const TextStyle(fontSize: 22,fontWeight: FontWeight.bold)),                            
+              Text(value!.name.toUpperCase(),style: const TextStyle(fontSize: 22,fontWeight: FontWeight.bold)),                            
               Row(
                 children: [
                   Text(
-                    value.rating,
+                    value!.rating,
                     overflow: TextOverflow.ellipsis,
                     maxLines: 1,
                     style: const TextStyle(
@@ -169,7 +169,7 @@ class SingleCosmeticProduct extends StatelessWidget {
               ColoredBox(
                 color: Colors.blueGrey,
                 child: Text(
-                  '  ₹ ${value.price}  ',
+                  '  ₹ ${value!.price}  ',
                   overflow: TextOverflow.ellipsis,
                   maxLines: 1,
                   style: const TextStyle(
@@ -177,7 +177,7 @@ class SingleCosmeticProduct extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 5,),
-              Text(value.description.trimRight().trimLeft(),style: const TextStyle(fontWeight: FontWeight.bold,fontFamily: 'hijas'),)
+              Text(value!.description.trimRight().trimLeft(),style: const TextStyle(fontWeight: FontWeight.bold,fontFamily: 'hijas'),)
             ],
           ),
         ),
