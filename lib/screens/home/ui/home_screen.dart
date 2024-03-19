@@ -53,7 +53,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ));
         }
         else if (state is HomeNavigateToCosmeticSingleProductPageActionState){
-          Navigator.push(context,MaterialPageRoute(builder: (context) =>  SingleCosmeticProduct(homeBloc: homeBloc,value: state.data),));
+          Navigator.push(context,MaterialPageRoute(builder: (context) =>  SingleCosmeticProduct(homeBloc: homeBloc,value: state.data,electroMania: false),));
         }
         else if(state is HomeNavigateProductTileToElectroManiacListViewPageActionState){
           Navigator.push(context,MaterialPageRoute(builder: (context) =>  ListviewElectroManiacProducts(homeBloc: homeBloc, size: state.size, value: state.data),));
@@ -127,28 +127,6 @@ class _HomeScreenState extends State<HomeScreen> {
                         isFakeStoreListView: true,
                         value: successState,
                       ),
-                      ProductTileWidget(
-                        productDataModel: successState.purchasedProducts[2],
-                        container: true,
-                        homeBloc: homeBloc,
-                        size: mediaQuerySize,
-                        value: successState,
-                      ),
-                      ProductTileWidget(
-                        productDataModel: successState.purchasedProducts[1],
-                        container: true,
-                        homeBloc: homeBloc,
-                        size: mediaQuerySize,
-                        value: successState,
-                      ),
-                      ProductTileWidget(
-                        productDataModel: successState.purchasedProducts[0],
-                        container: true,
-                        homeBloc: homeBloc,
-                        size: mediaQuerySize,
-                        value: successState,
-                      ),
-                      const Divider(),
                       Container(
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10),
@@ -156,7 +134,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           color: Colors.black,                         
                         ),
                         child: Padding(
-                          padding: const EdgeInsets.only(left: 5,right: 0),
+                          padding: const EdgeInsets.only(left: 5,),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
@@ -178,7 +156,29 @@ class _HomeScreenState extends State<HomeScreen> {
                           ),
                         ),
                       ),
-                      const Divider(),
+                      SizedBox(height: mediaQuerySize.width/80,),
+                      ProductTileWidget(
+                        productDataModel: successState.purchasedProducts[2],
+                        container: true,
+                        homeBloc: homeBloc,
+                        size: mediaQuerySize,
+                        value: successState,
+                      ),
+                      ProductTileWidget(
+                        productDataModel: successState.purchasedProducts[1],
+                        container: true,
+                        homeBloc: homeBloc,
+                        size: mediaQuerySize,
+                        value: successState,
+                      ),
+                      ProductTileWidget(
+                        productDataModel: successState.purchasedProducts[0],
+                        container: true,
+                        homeBloc: homeBloc,
+                        size: mediaQuerySize,
+                        value: successState,
+                      ),
+                      
                     ],
                   ),
                 ),

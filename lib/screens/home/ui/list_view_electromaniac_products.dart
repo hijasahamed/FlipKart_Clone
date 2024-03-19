@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc_tutorial_app/screens/home/bloc/home_bloc.dart';
 import 'package:flutter_bloc_tutorial_app/screens/home/models/electro_maniac_model.dart';
 import 'package:flutter_bloc_tutorial_app/screens/home/ui/app_bar_screen.dart';
+import 'package:flutter_bloc_tutorial_app/screens/home/ui/cosmetic_widget.dart';
 List<String> images=[];
 class ListviewElectroManiacProducts extends StatelessWidget {
   final HomeBloc homeBloc;
@@ -27,34 +28,39 @@ class ListviewElectroManiacProducts extends StatelessWidget {
               children: [
                 Stack(
                   children:[ 
-                    SizedBox(
-                      height: size.height/5.8,
-                      width: size.width,
-                      child: Row(
-                        children: [
-                          Container(                        
-                            height: size.height/8,
-                            width: size.width/3,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(15),                          
-                              image: DecorationImage(image: NetworkImage('$baseurl$image'))
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(context,MaterialPageRoute(builder: (context) =>  SingleCosmeticProduct(homeBloc: homeBloc,value: val,electroMania: true,img: image,),));
+                      },
+                      child: SizedBox(
+                        height: size.height/5.8,
+                        width: size.width,
+                        child: Row(
+                          children: [
+                            Container(                        
+                              height: size.height/8,
+                              width: size.width/3,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(15),                          
+                                image: DecorationImage(image: NetworkImage('$baseurl$image'))
+                              ),
                             ),
-                          ),
-                          SizedBox(width: size.width/40,),
-                          Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(val.name,style: const TextStyle(fontWeight: FontWeight.bold)),
-                              Text('₹${val.price}',style: const TextStyle(fontWeight: FontWeight.bold)),
-                              Text('Offer Price ₹$discountOfferRate',style: const TextStyle(color: Colors.green,fontWeight: FontWeight.bold),),
-                              Text('⬇️ $dropAmount% Drop on Price Grab it ASAP'),
-                              const Text('Free delivery 🚚'),
-                              const Text('more offers >')
-                            ],
-                          ),
-                        ],
-                      )
+                            SizedBox(width: size.width/40,),
+                            Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(val.name,style: const TextStyle(fontWeight: FontWeight.bold)),
+                                Text('₹${val.price}',style: const TextStyle(fontWeight: FontWeight.bold)),
+                                Text('Offer Price ₹$discountOfferRate',style: const TextStyle(color: Colors.green,fontWeight: FontWeight.bold),),
+                                Text('⬇️ $dropAmount% Drop on Price Grab it ASAP'),
+                                const Text('Free delivery 🚚'),
+                                const Text('more offers >')
+                              ],
+                            ),
+                          ],
+                        )
+                      ),
                     ),
                     Positioned( 
                       left: 350,

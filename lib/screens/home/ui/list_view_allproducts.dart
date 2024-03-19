@@ -3,7 +3,7 @@ import 'package:flutter_bloc_tutorial_app/screens/home/bloc/home_bloc.dart';
 import 'package:flutter_bloc_tutorial_app/screens/home/ui/app_bar_screen.dart';
 
 
-List <String> imageList=[];
+// List <String> imageList=[];
 
 
 class ListviewAllProducts extends StatelessWidget {
@@ -21,20 +21,19 @@ class ListviewAllProducts extends StatelessWidget {
     return Scaffold(
       appBar: MyAppBar(homeBloc: homeBloc, buttonsOn: false),
       body: ListView.builder(
-        itemCount: 1,
+        itemCount: value.allProducts.length-2,
         itemBuilder: (context, index) {
           final val = value.allProducts[index];
           // final img=imageList[index];
           return Container(
               child: Column(
             children: [
-              // Container(
-              //   height: size.height / 8,
-              //   width: size.width / 3,
-              //   decoration: BoxDecoration(
-              //     color: Colors.amber,
-              //       image: DecorationImage(image: NetworkImage('$baseurl$img'))),
-              // ),
+              Container(
+                height: size.height / 8,
+                width: size.width / 3,
+                decoration: BoxDecoration(
+                    image: DecorationImage(image: NetworkImage(val.imageUrl))),
+              ),
               Text(val.name),
               Text(val.price),
               Text(val.description),
@@ -47,13 +46,14 @@ class ListviewAllProducts extends StatelessWidget {
   }
 }
 
-allProductImage(item){
-  for (int i = 0; i < item.length; i++) {
-      for (int j = 0; j < item[i]['Imagepath'].length;) {
-        imageList.add(item[i]['Imagepath'][j]);
-        break;
-      }
-    }
-}
+// allProductImage(item){
+//   for (int i = 0; i < item.length; i++) {
+//       for (int j = 0; j < item[i]['images'].length;) {
+//         imageList.add(item[i]['images'][j]);
+//         break;
+//       }
+//     }
+//     print('List Images = ${imageList}');
+// }
 
-const baseurl='https://api.escuelajs.co/api/v1/products';
+// const baseurl='https://api.escuelajs.co/api/v1/products';

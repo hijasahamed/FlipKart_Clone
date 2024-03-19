@@ -58,13 +58,13 @@ Future <List<ElectroManiacModel>> electroManiaDataFetch() async {
 Future<List<AllProductApiModel>> allProductApiDataFetching()async{
   List<AllProductApiModel> res=[];
   try{
-    const url='https://api.escuelajs.co/api/v1/products';
+    const url='https://api.escuelajs.co/api/v1/categories';
   Uri uri=Uri.parse(url);
   final response=await http.get(uri);
   print('Hijas Hijas all products ${response.body}');
   final json=jsonDecode(response.body)as List;
    res=json.map((e) => AllProductApiModel.fromjson(e)).toList();
-   allProductImage(json);
+  //  allProductImage(json);
   } catch (e){
     if(kDebugMode){
       print(e);

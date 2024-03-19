@@ -3,18 +3,20 @@ class AllProductApiModel{
   String name;
   String price;
   String description;
-  String stock;
+  String imageUrl;
   AllProductApiModel(
       {required this.name,
       required this.id,
       required this.price,
       required this.description,
-      required this.stock,});
+      required this.imageUrl
+      });
 
   factory AllProductApiModel.fromjson(Map json) => AllProductApiModel(
       id: json['id'],
-      name: json['title'].toString(),
-      price: json['price'].toString(),
-      description: json['description'].toString(),
-      stock: json['stock'].toString(),);
+      name: json['name'].toString(),
+      price: json['updatedAt'].toString(),
+      description: json['creationAt'].toString(),
+      imageUrl: json['image'].toString()
+      );
 }

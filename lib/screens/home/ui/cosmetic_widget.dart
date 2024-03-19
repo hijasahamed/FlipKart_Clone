@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc_tutorial_app/screens/home/bloc/home_bloc.dart';
 import 'package:flutter_bloc_tutorial_app/screens/home/models/api_model.dart';
 import 'package:flutter_bloc_tutorial_app/screens/home/ui/app_bar_screen.dart';
+import 'package:flutter_bloc_tutorial_app/screens/home/ui/list_view_electromaniac_products.dart';
 
 class CosmeticWidget extends StatelessWidget {
   final HomeBloc homeBloc;
@@ -94,9 +95,11 @@ class CosmeticWidget extends StatelessWidget {
 
 class SingleCosmeticProduct extends StatelessWidget {
   final HomeBloc homeBloc;
-  final ApiModel? value;
+  final dynamic value;
+  final bool electroMania;
+  final String? img;
   const SingleCosmeticProduct(
-      {super.key, required this.homeBloc,  this.value});
+      {super.key, required this.homeBloc,  this.value,required this.electroMania,this.img});
 
   @override
   Widget build(BuildContext context) {
@@ -120,36 +123,43 @@ class SingleCosmeticProduct extends StatelessWidget {
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10),
                           image: DecorationImage(
-                              image: NetworkImage(value!.imageurl),
-                              fit: BoxFit.fill,
+                              image: electroMania? NetworkImage('$baseurl$img') :NetworkImage(value!.imageurl),
+                              fit: BoxFit.cover,
                               filterQuality: FilterQuality.high)),
                     ),
                   ),
                   Positioned(
-                    bottom: 0,
+                    bottom: 5,
                     right: 5,
                     child: Row(
                       children: [
-                        IconButton(
-                          onPressed: (){
-
-                          }, 
-                          icon: const Icon(Icons.favorite,color: Colors.red,size: 25,)
+                        CircleAvatar(
+                          backgroundColor: Colors.black,
+                          child: IconButton(
+                            onPressed: (){
+                          
+                            }, 
+                            icon: const Icon(Icons.favorite,color: Colors.red,size: 25,)
+                          ),
                         ),
-                        IconButton(
-                          onPressed: (){
-
-                          }, 
-                          icon: const Icon(Icons.shopping_cart,color: Colors.blue,size: 25,)
+                        const SizedBox(width: 5,),
+                        CircleAvatar(
+                          backgroundColor: Colors.black,
+                          child: IconButton(
+                            onPressed: (){
+                          
+                            }, 
+                            icon: const Icon(Icons.shopping_cart,color: Colors.blue,size: 25,)
+                          ),
                         ),
                       ],
                     )
                   )
                 ],
               ),
-              Text(value!.brand.toUpperCase(),style: const TextStyle(fontSize: 30,fontWeight: FontWeight.bold,fontFamily: 'hijas'),),
-              const Divider(),
               Text(value!.name.toUpperCase(),style: const TextStyle(fontSize: 22,fontWeight: FontWeight.bold)),                            
+              const Divider(),
+              Text(value!.brand.toUpperCase(),style: const TextStyle(fontSize: 22,fontWeight: FontWeight.bold,fontFamily: 'hijas'),),
               Row(
                 children: [
                   Text(
