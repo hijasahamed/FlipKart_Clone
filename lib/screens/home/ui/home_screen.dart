@@ -2,11 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_bloc_tutorial_app/api_service/api_service.dart';
 import 'package:flutter_bloc_tutorial_app/screens/home/bloc/home_bloc.dart';
-import 'package:flutter_bloc_tutorial_app/screens/home/models/cart/ui/cart_screen.dart';
+import 'package:flutter_bloc_tutorial_app/screens/home/cart/ui/cart_screen.dart';
 import 'package:flutter_bloc_tutorial_app/screens/home/ui/app_bar_screen.dart';
 import 'package:flutter_bloc_tutorial_app/screens/home/ui/cosmetic_widget.dart';
 import 'package:flutter_bloc_tutorial_app/screens/home/ui/carousel_slider_screen.dart';
 import 'package:flutter_bloc_tutorial_app/screens/home/ui/list_view_electromaniac_products.dart';
+import 'package:flutter_bloc_tutorial_app/screens/home/ui/list_view_fakestore_products.dart';
 import 'package:flutter_bloc_tutorial_app/screens/home/ui/lottie_watch_screen.dart';
 import 'package:flutter_bloc_tutorial_app/screens/home/ui/product_tile_widget.dart';
 import 'package:flutter_bloc_tutorial_app/screens/wishlist/ui/wish_list_screen.dart';
@@ -29,9 +30,10 @@ class _HomeScreenState extends State<HomeScreen> {
   final HomeBloc homeBloc = HomeBloc();
   @override
   Widget build(BuildContext context) {
-    getallproducts(); 
+    getAllCosmeticProducts(); 
     electroManiaDataFetch();
-    fetchFakeStoreApiData();   
+    fetchFakeStoreApiData(); 
+    allProductApiDataFetching();  
     return BlocConsumer<HomeBloc, HomeState>(
       bloc: homeBloc,
       listenWhen: (previous, current) => current is HomeActionState,
@@ -55,6 +57,9 @@ class _HomeScreenState extends State<HomeScreen> {
         }
         else if(state is HomeNavigateProductTileToElectroManiacListViewPageActionState){
           Navigator.push(context,MaterialPageRoute(builder: (context) =>  ListviewElectroManiacProducts(homeBloc: homeBloc, size: state.size, value: state.data),));
+        }
+        else if(state is HomeNavigateProductTileToFakeStoreListViewPageActionState){
+          Navigator.push(context,MaterialPageRoute(builder: (context) =>  ListViewFakeStoreProducts(homeBloc: homeBloc, size: state.size, value: state.data),));
         }
       },
       builder: (context, state) {
@@ -98,6 +103,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             homeBloc: homeBloc,
                             size: mediaQuerySize,
                             value: successState,
+                            circleIndex: index,
                           );
                         },
                         itemCount: successState.products.length,

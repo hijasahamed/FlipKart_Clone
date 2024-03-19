@@ -2,7 +2,6 @@ class ElectroManiacModel {
   String id;
   String name;
   String price;
-
   String description;
   ElectroManiacModel(
       {required this.name,

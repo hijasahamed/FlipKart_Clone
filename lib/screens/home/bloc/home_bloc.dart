@@ -8,6 +8,7 @@ import 'package:flutter_bloc_tutorial_app/api_service/api_service.dart';
 
 import 'package:flutter_bloc_tutorial_app/data/grocery_data.dart';
 import 'package:flutter_bloc_tutorial_app/data/purchase_products.dart';
+import 'package:flutter_bloc_tutorial_app/screens/home/models/all_product_api_model.dart';
 import 'package:flutter_bloc_tutorial_app/screens/home/models/api_model.dart';
 import 'package:flutter_bloc_tutorial_app/screens/home/models/electro_maniac_model.dart';
 import 'package:flutter_bloc_tutorial_app/screens/home/models/fakestore_api_model.dart';
@@ -38,6 +39,9 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
 
     on<HomeNavigateProductTileToElectroManiacListViewPageEvent>(
         homeNavigateProductTileToListViewPageEvent);
+
+    on<HomeNavigateProductTileToFakeStoreListViewPageEvent>(
+        homeNavigateProductTileToFakeStoreListViewPageEvent);
   }
 
   FutureOr<void> homeInitialEvent(
@@ -46,11 +50,13 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
 
     await Future.delayed(const Duration(milliseconds: 1800));
 
-    final values = await getallproducts();
+    final values = await getAllCosmeticProducts();
 
     final electroManiacValues = await electroManiaDataFetch();
 
-    final fakeStorevalues=await  fetchFakeStoreApiData();
+    final fakeStorevalues = await fetchFakeStoreApiData();
+
+    final allProductsValue = await allProductApiDataFetching();
 
     emit(HomeLoadedSuccessState(
       products: Grocerydata.groceryProduct
@@ -72,6 +78,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       apiproducts: values,
       electroManiaProducts: electroManiacValues,
       fakeStoreProducts: fakeStorevalues,
+      allProducts: allProductsValue
     ));
   }
 
@@ -119,6 +126,13 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   FutureOr<void> homeNavigateProductTileToListViewPageEvent(
       HomeNavigateProductTileToElectroManiacListViewPageEvent event,
       Emitter<HomeState> emit) {
-    emit(HomeNavigateProductTileToElectroManiacListViewPageActionState(data: event.data,size: event.size,homebloc: event.homeBloc));
+    emit(HomeNavigateProductTileToElectroManiacListViewPageActionState(
+        data: event.data, size: event.size, homebloc: event.homeBloc));
   }
+
+  FutureOr<void> homeNavigateProductTileToFakeStoreListViewPageEvent(
+      HomeNavigateProductTileToFakeStoreListViewPageEvent event,
+      Emitter<HomeState> emit) {
+        emit(HomeNavigateProductTileToFakeStoreListViewPageActionState(data: event.data,homebloc: event.homeBloc,size: event.size));
+      }
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc_tutorial_app/screens/home/bloc/home_bloc.dart';
 import 'package:flutter_bloc_tutorial_app/screens/home/models/home_product_data_model.dart';
+import 'package:flutter_bloc_tutorial_app/screens/home/ui/list_view_allproducts.dart';
 import 'package:flutter_bloc_tutorial_app/screens/home/ui/list_view_electromaniac_products.dart';
 import 'package:flutter_bloc_tutorial_app/screens/home/ui/list_view_fakestore_products.dart';
 
@@ -12,6 +13,7 @@ class ProductTileWidget extends StatelessWidget {
   final bool? isFakeStoreListView;
   final Size size;
   final HomeLoadedSuccessState value;
+  final int? circleIndex;
   const ProductTileWidget(
       {super.key,
       required this.productDataModel,
@@ -20,40 +22,48 @@ class ProductTileWidget extends StatelessWidget {
       required this.homeBloc,
       required this.size,
       required this.value,
-      this.isFakeStoreListView
+      this.isFakeStoreListView,
+      this.circleIndex,
       });
 
   @override
   Widget build(BuildContext context) {
     return container == false
-        ? Column(
-            children: [
-              Container(
-                decoration: BoxDecoration(
-                    color: const Color.fromARGB(32, 123, 124, 123),
-                    borderRadius: BorderRadius.circular(50)),
-                child: Padding(
-                  padding: const EdgeInsets.all(2),
-                  child: CircleAvatar(
-                    backgroundColor: Colors.black,
-                    radius: 35,
-                    child: Container(
-                      width: double.maxFinite,
-                      decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          image: DecorationImage(
-                              image: NetworkImage(productDataModel.imageUrl),
-                              fit: BoxFit.cover)),
+        ? GestureDetector(
+          onTap: () {
+            if(circleIndex==7){
+              Navigator.of(context).push(MaterialPageRoute(builder: (ctx){return  ListviewAllProducts(homeBloc: homeBloc,size: size,value: value,);}));
+            }
+          },
+          child: Column(
+              children: [
+                Container(
+                  decoration: BoxDecoration(
+                      color: const Color.fromARGB(32, 123, 124, 123),
+                      borderRadius: BorderRadius.circular(50)),
+                  child: Padding(
+                    padding: const EdgeInsets.all(2),
+                    child: CircleAvatar(
+                      backgroundColor: Colors.black,
+                      radius: 35,
+                      child: Container(
+                        width: double.maxFinite,
+                        decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            image: DecorationImage(
+                                image: NetworkImage(productDataModel.imageUrl),
+                                fit: BoxFit.cover)),
+                      ),
                     ),
                   ),
                 ),
-              ),
-              Text(
-                productDataModel.name,
-                style: const TextStyle(fontWeight: FontWeight.w600),
-              ),
-            ],
-          )
+                Text(
+                  productDataModel.name,
+                  style: const TextStyle(fontWeight: FontWeight.w600),
+                ),
+              ],
+            ),
+        )
         : GestureDetector(
             onTap: () {
               if (isElectroManiaclistViewScreen == true) {
@@ -62,9 +72,10 @@ class ProductTileWidget extends StatelessWidget {
                         data: value, size: size, homeBloc: homeBloc));
               }
               if(isFakeStoreListView==true){
-                Navigator.of(context).push(MaterialPageRoute(builder: (context) {
-                  return ListViewFakeStoreProducts(homeBloc: homeBloc, size: size, value: value);
-                },));
+                // Navigator.of(context).push(MaterialPageRoute(builder: (context) {
+                //   return ListViewFakeStoreProducts(homeBloc: homeBloc, size: size, value: value);
+                // },));
+                homeBloc.add(HomeNavigateProductTileToFakeStoreListViewPageEvent(data:value,homeBloc: homeBloc,size: size ));
               }
             },
             child: Column(
