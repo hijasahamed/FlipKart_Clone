@@ -25,3 +25,10 @@ class HomeCosmeticSingleProductPageNavigateEvent extends HomeEvent{
 final ApiModel data;
 HomeCosmeticSingleProductPageNavigateEvent({required this.data});
 }
+
+class HomeNavigateProductTileToElectroManiacListViewPageEvent extends HomeEvent{
+  final dynamic data;
+  final Size size;
+  final HomeBloc homeBloc;
+  HomeNavigateProductTileToElectroManiacListViewPageEvent({required this.data,required this.size,required this.homeBloc});
+}

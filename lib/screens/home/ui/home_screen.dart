@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_bloc_tutorial_app/api_service/api_service.dart';
-import 'package:flutter_bloc_tutorial_app/screens/home/models/cart/ui/cart_screen.dart';
 import 'package:flutter_bloc_tutorial_app/screens/home/bloc/home_bloc.dart';
+import 'package:flutter_bloc_tutorial_app/screens/home/models/cart/ui/cart_screen.dart';
 import 'package:flutter_bloc_tutorial_app/screens/home/ui/app_bar_screen.dart';
 import 'package:flutter_bloc_tutorial_app/screens/home/ui/cosmetic_widget.dart';
 import 'package:flutter_bloc_tutorial_app/screens/home/ui/carousel_slider_screen.dart';
+import 'package:flutter_bloc_tutorial_app/screens/home/ui/list_view_electromaniac_products.dart';
 import 'package:flutter_bloc_tutorial_app/screens/home/ui/lottie_watch_screen.dart';
 import 'package:flutter_bloc_tutorial_app/screens/home/ui/product_tile_widget.dart';
 import 'package:flutter_bloc_tutorial_app/screens/wishlist/ui/wish_list_screen.dart';
@@ -29,7 +30,8 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     getallproducts(); 
-    electroManiaDataFetch();   
+    electroManiaDataFetch();
+    fetchFakeStoreApiData();   
     return BlocConsumer<HomeBloc, HomeState>(
       bloc: homeBloc,
       listenWhen: (previous, current) => current is HomeActionState,
@@ -50,6 +52,9 @@ class _HomeScreenState extends State<HomeScreen> {
         }
         else if (state is HomeNavigateToCosmeticSingleProductPageActionState){
           Navigator.push(context,MaterialPageRoute(builder: (context) =>  SingleCosmeticProduct(homeBloc: homeBloc,value: state.data),));
+        }
+        else if(state is HomeNavigateProductTileToElectroManiacListViewPageActionState){
+          Navigator.push(context,MaterialPageRoute(builder: (context) =>  ListviewElectroManiacProducts(homeBloc: homeBloc, size: state.size, value: state.data),));
         }
       },
       builder: (context, state) {
@@ -92,6 +97,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             container: false,
                             homeBloc: homeBloc,
                             size: mediaQuerySize,
+                            value: successState,
                           );
                         },
                         itemCount: successState.products.length,
@@ -102,7 +108,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       ProductTileWidget(
                         productDataModel: successState.purchasedProducts[4], 
                         container: true,
-                        isGadgets: true,
+                        isElectroManiaclistViewScreen: true,
                         homeBloc: homeBloc,
                         size: mediaQuerySize,
                         value: successState,
@@ -112,24 +118,29 @@ class _HomeScreenState extends State<HomeScreen> {
                         container: true,
                         homeBloc: homeBloc,
                         size: mediaQuerySize,
+                        isFakeStoreListView: true,
+                        value: successState,
                       ),
                       ProductTileWidget(
                         productDataModel: successState.purchasedProducts[2],
                         container: true,
                         homeBloc: homeBloc,
                         size: mediaQuerySize,
+                        value: successState,
                       ),
                       ProductTileWidget(
                         productDataModel: successState.purchasedProducts[1],
                         container: true,
                         homeBloc: homeBloc,
                         size: mediaQuerySize,
+                        value: successState,
                       ),
                       ProductTileWidget(
                         productDataModel: successState.purchasedProducts[0],
                         container: true,
                         homeBloc: homeBloc,
                         size: mediaQuerySize,
+                        value: successState,
                       ),
                       const Divider(),
                       Container(

@@ -14,7 +14,9 @@ class HomeLoadedSuccessState extends HomeState{
   final List<ProductsDataModel> purchasedProducts;
   final List<ApiModel> apiproducts;
   final List<ElectroManiacModel> electroManiaProducts;
-  HomeLoadedSuccessState({required this.products,required this.purchasedProducts,required this.apiproducts,required this.electroManiaProducts,});
+  final List<FakeStoreApiModel> fakeStoreProducts;
+  HomeLoadedSuccessState({required this.products,required this.purchasedProducts,required this.apiproducts,required this.electroManiaProducts,
+  required this.fakeStoreProducts,});
 }
 
 class HomeErrorState extends HomeState{}
@@ -25,5 +27,13 @@ class HomeNavigateToCartPageActionState extends HomeActionState{}
 
 class HomeNavigateToCosmeticSingleProductPageActionState extends HomeActionState{
 final ApiModel data;
+
   HomeNavigateToCosmeticSingleProductPageActionState({required this.data});
+}
+
+class HomeNavigateProductTileToElectroManiacListViewPageActionState extends HomeActionState{
+  final dynamic data;
+  final Size size;
+  final HomeBloc homebloc;
+  HomeNavigateProductTileToElectroManiacListViewPageActionState({required this.data,required this.size,required this.homebloc});
 }
