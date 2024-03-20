@@ -66,7 +66,9 @@ class ListviewElectroManiacProducts extends StatelessWidget {
                       left: 350,
                       top: 105,
                       child: IconButton(
-                        onPressed: (){}, 
+                        onPressed: (){
+                          homeBloc.add(HomeProductWishlistButtonClickedEvent());
+                        }, 
                         icon: const Icon(Icons.favorite_border,color: Colors.grey,)
                       )
                     )

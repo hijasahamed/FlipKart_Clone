@@ -1,4 +1,4 @@
-class Grocerydata{
+class CategoryProducts{
 
   static List<Map<String,dynamic>> groceryProduct=[
     {

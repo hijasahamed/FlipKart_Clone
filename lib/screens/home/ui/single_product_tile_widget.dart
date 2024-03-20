@@ -32,8 +32,8 @@ class SingleProductTileWidget extends StatelessWidget {
                   IconButton(
                       onPressed: () {},
                       icon: const Icon(
-                        Icons.favorite,
-                        color: Colors.red,
+                        Icons.favorite_border,
+                        
                         size: 25,
                       )),
                   const SizedBox(
@@ -42,8 +42,8 @@ class SingleProductTileWidget extends StatelessWidget {
                   IconButton(
                       onPressed: () {},
                       icon: const Icon(
-                        Icons.shopping_cart,
-                        color: Colors.blue,
+                        Icons.shopping_cart_outlined,
+                        
                         size: 25,
                       )),
                 ],

@@ -59,7 +59,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     final allProductsValue = await allProductApiDataFetching();
 
     emit(HomeLoadedSuccessState(
-      products: Grocerydata.groceryProduct
+      products: CategoryProducts.groceryProduct
           .map((e) => ProductsDataModel(
               id: e['id'],
               name: e['name'],
