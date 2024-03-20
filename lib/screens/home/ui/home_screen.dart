@@ -10,6 +10,7 @@ import 'package:flutter_bloc_tutorial_app/screens/home/ui/list_view_electromania
 import 'package:flutter_bloc_tutorial_app/screens/home/ui/list_view_fakestore_products.dart';
 import 'package:flutter_bloc_tutorial_app/screens/home/ui/lottie_watch_screen.dart';
 import 'package:flutter_bloc_tutorial_app/screens/home/ui/product_tile_widget.dart';
+import 'package:flutter_bloc_tutorial_app/screens/home/ui/single_product_tile_widget.dart';
 import 'package:flutter_bloc_tutorial_app/screens/wishlist/ui/wish_list_screen.dart';
 import 'package:lottie/lottie.dart';
 
@@ -30,10 +31,10 @@ class _HomeScreenState extends State<HomeScreen> {
   final HomeBloc homeBloc = HomeBloc();
   @override
   Widget build(BuildContext context) {
-    getAllCosmeticProducts(); 
+    getAllCosmeticProducts();
     electroManiaDataFetch();
-    fetchFakeStoreApiData(); 
-    allProductApiDataFetching();  
+    fetchFakeStoreApiData();
+    allProductApiDataFetching();
     return BlocConsumer<HomeBloc, HomeState>(
       bloc: homeBloc,
       listenWhen: (previous, current) => current is HomeActionState,
@@ -51,15 +52,51 @@ class _HomeScreenState extends State<HomeScreen> {
               MaterialPageRoute(
                 builder: (context) => const WishlistScreen(),
               ));
-        }
-        else if (state is HomeNavigateToCosmeticSingleProductPageActionState){
-          Navigator.push(context,MaterialPageRoute(builder: (context) =>  SingleCosmeticProduct(homeBloc: homeBloc,value: state.data,electroMania: false),));
-        }
-        else if(state is HomeNavigateProductTileToElectroManiacListViewPageActionState){
-          Navigator.push(context,MaterialPageRoute(builder: (context) =>  ListviewElectroManiacProducts(homeBloc: homeBloc, size: state.size, value: state.data),));
-        }
-        else if(state is HomeNavigateProductTileToFakeStoreListViewPageActionState){
-          Navigator.push(context,MaterialPageRoute(builder: (context) =>  ListViewFakeStoreProducts(homeBloc: homeBloc, size: state.size, value: state.data),));
+        } else if (state
+            is HomeNavigateToCosmeticSingleProductPageActionState) {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => SingleProductTileWidget(
+                    homeBloc: homeBloc, value: state.data, electroMania: false),
+              ));
+        } else if (state
+            is HomeNavigateProductTileToElectroManiacListViewPageActionState) {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => ListviewElectroManiacProducts(
+                    homeBloc: homeBloc, size: state.size, value: state.data),
+              ));
+        } else if (state
+            is HomeNavigateProductTileToFakeStoreListViewPageActionState) {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => ListViewFakeStoreProducts(
+                    homeBloc: homeBloc, size: state.size, value: state.data),
+              ));
+        } else if (state is NavigateToFakeStoreSingleProductPageActionState) {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => SingleProductTileWidget(
+                  homeBloc: homeBloc,
+                  value: state.data,
+                  electroMania: false,
+                ),
+              ));
+        } else if (state
+            is NavigateToElectroManiaSingleProductPageActionState) {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => SingleProductTileWidget(
+                    homeBloc: homeBloc,
+                    value: state.data,
+                    electroMania: true,
+                    img: state.img),
+              ));
         }
       },
       builder: (context, state) {
@@ -75,12 +112,12 @@ class _HomeScreenState extends State<HomeScreen> {
             );
           case HomeLoadedSuccessState:
             final successState = state as HomeLoadedSuccessState;
-            final mediaQuerySize=MediaQuery.sizeOf(context);
+            final mediaQuerySize = MediaQuery.sizeOf(context);
             return Scaffold(
               backgroundColor: const Color.fromARGB(241, 255, 255, 255),
-              appBar: MyAppBar(homeBloc: homeBloc,buttonsOn: true),
+              appBar: MyAppBar(homeBloc: homeBloc, buttonsOn: true),
               body: Padding(
-                padding:  const EdgeInsets.all(4),
+                padding: const EdgeInsets.all(4),
                 child: SingleChildScrollView(
                   child: Column(
                     children: [
@@ -91,7 +128,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       GridView.builder(
                         shrinkWrap: true,
                         gridDelegate:
-                          const SliverGridDelegateWithFixedCrossAxisCount(
+                            const SliverGridDelegateWithFixedCrossAxisCount(
                           crossAxisCount: 4,
                           crossAxisSpacing: 1,
                           mainAxisSpacing: 1,
@@ -109,10 +146,10 @@ class _HomeScreenState extends State<HomeScreen> {
                         itemCount: successState.products.length,
                       ),
                       const Divider(),
-                      LottieWidgetScreen(size:mediaQuerySize),
+                      LottieWidgetScreen(size: mediaQuerySize),
                       const Divider(),
                       ProductTileWidget(
-                        productDataModel: successState.purchasedProducts[4], 
+                        productDataModel: successState.purchasedProducts[4],
                         container: true,
                         isElectroManiaclistViewScreen: true,
                         homeBloc: homeBloc,
@@ -131,32 +168,51 @@ class _HomeScreenState extends State<HomeScreen> {
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10),
                           border: Border.all(width: .5),
-                          color: Colors.black,                         
+                          color: Colors.black,
                         ),
                         child: Padding(
-                          padding: const EdgeInsets.only(left: 5,),
+                          padding: const EdgeInsets.only(
+                            left: 5,
+                          ),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Padding(
-                                padding: const EdgeInsets.only(top: 5,bottom: 5),
+                                padding:
+                                    const EdgeInsets.only(top: 5, bottom: 5),
                                 child: Row(
                                   children: [
-                                    const Text(' Flat 20% Off for Cosmetics ',style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold,fontFamily: 'hijas',color: Colors.white),),
-                                    LottieBuilder.asset('assets/animations/Animation - 1710669204067.json',height: mediaQuerySize.height/13,width: mediaQuerySize.width/6,)
+                                    const Text(
+                                      ' Flat 20% Off for Cosmetics ',
+                                      style: TextStyle(
+                                          fontSize: 25,
+                                          fontWeight: FontWeight.bold,
+                                          fontFamily: 'hijas',
+                                          color: Colors.white),
+                                    ),
+                                    LottieBuilder.asset(
+                                      'assets/animations/Animation - 1710669204067.json',
+                                      height: mediaQuerySize.height / 13,
+                                      width: mediaQuerySize.width / 6,
+                                    )
                                   ],
-                                ), 
+                                ),
                               ),
                               SizedBox(
-                                height: mediaQuerySize.height/4.6,
-                                width: mediaQuerySize.width,
-                                child: CosmeticWidget(homeBloc: homeBloc, value: successState,size: mediaQuerySize,)
-                              ),
+                                  height: mediaQuerySize.height / 4.6,
+                                  width: mediaQuerySize.width,
+                                  child: CosmeticWidget(
+                                    homeBloc: homeBloc,
+                                    value: successState,
+                                    size: mediaQuerySize,
+                                  )),
                             ],
                           ),
                         ),
                       ),
-                      SizedBox(height: mediaQuerySize.width/80,),
+                      SizedBox(
+                        height: mediaQuerySize.width / 80,
+                      ),
                       ProductTileWidget(
                         productDataModel: successState.purchasedProducts[2],
                         container: true,
@@ -178,7 +234,6 @@ class _HomeScreenState extends State<HomeScreen> {
                         size: mediaQuerySize,
                         value: successState,
                       ),
-                      
                     ],
                   ),
                 ),

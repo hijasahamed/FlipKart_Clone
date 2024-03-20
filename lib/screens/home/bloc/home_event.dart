@@ -5,21 +5,13 @@ abstract class HomeEvent {}
 
 class HomeInitialEvent extends HomeEvent{}
 
-class HomeProductWishlistButtonClickedEvent extends HomeEvent{
+class HomeProductWishlistButtonClickedEvent extends HomeEvent{}
 
-}
+class HomeProductCartButtonClickedEvent extends HomeEvent{  }
 
-class HomeProductCartButtonClickedEvent extends HomeEvent{
-  
-}
+class HomeWishlistNavigateEvent extends HomeEvent{ }
 
-class HomeWishlistNavigateEvent extends HomeEvent{
-  
-}
-
-class HomeCartNavigateEvent extends HomeEvent{
-  
-}
+class HomeCartNavigateEvent extends HomeEvent{}
 
 class HomeCosmeticSingleProductPageNavigateEvent extends HomeEvent{
 final ApiModel data;
@@ -38,4 +30,17 @@ class HomeNavigateProductTileToFakeStoreListViewPageEvent extends HomeEvent{
   final Size size;
   final HomeBloc homeBloc;
   HomeNavigateProductTileToFakeStoreListViewPageEvent({required this.data,required this.size,required this.homeBloc});
+}
+
+
+class FakeStoreSingleProductPageNavigateEvent extends HomeEvent{
+final FakeStoreApiModel data;
+FakeStoreSingleProductPageNavigateEvent({required this.data});
+}
+
+
+class ElectroManiacSingleProductPageNavigateEvent extends HomeEvent{
+final ElectroManiacModel data;
+final String img;
+ElectroManiacSingleProductPageNavigateEvent({required this.data,required this.img});
 }

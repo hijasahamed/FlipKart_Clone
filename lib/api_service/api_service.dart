@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'package:flutter_bloc_tutorial_app/screens/home/ui/list_view_allproducts.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc_tutorial_app/screens/home/models/all_product_api_model.dart';
@@ -61,7 +60,7 @@ Future<List<AllProductApiModel>> allProductApiDataFetching()async{
     const url='https://api.escuelajs.co/api/v1/categories';
   Uri uri=Uri.parse(url);
   final response=await http.get(uri);
-  print('Hijas Hijas all products ${response.body}');
+  // print('Hijas Hijas all products ${response.body}');
   final json=jsonDecode(response.body)as List;
    res=json.map((e) => AllProductApiModel.fromjson(e)).toList();
   //  allProductImage(json);

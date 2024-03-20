@@ -42,10 +42,14 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
 
     on<HomeNavigateProductTileToFakeStoreListViewPageEvent>(
         homeNavigateProductTileToFakeStoreListViewPageEvent);
+
+     on<FakeStoreSingleProductPageNavigateEvent>(fakeStoreSingleProductPageNavigateEvent);  
+
+     on<ElectroManiacSingleProductPageNavigateEvent>(electroManiacSingleProductPageNavigateEvent);
+
   }
 
-  FutureOr<void> homeInitialEvent(
-      HomeInitialEvent event, Emitter<HomeState> emit) async {
+  FutureOr<void> homeInitialEvent(HomeInitialEvent event, Emitter<HomeState> emit) async {
     emit(HomeLoadingState());
 
     await Future.delayed(const Duration(milliseconds: 1800));
@@ -135,4 +139,12 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       Emitter<HomeState> emit) {
         emit(HomeNavigateProductTileToFakeStoreListViewPageActionState(data: event.data,homebloc: event.homeBloc,size: event.size));
       }
+
+  FutureOr<void> fakeStoreSingleProductPageNavigateEvent(FakeStoreSingleProductPageNavigateEvent event, Emitter<HomeState> emit) {
+    emit(NavigateToFakeStoreSingleProductPageActionState(data: event.data));
+  }
+
+  FutureOr<void> electroManiacSingleProductPageNavigateEvent(ElectroManiacSingleProductPageNavigateEvent event, Emitter<HomeState> emit) {
+    emit(NavigateToElectroManiaSingleProductPageActionState(data: event.data, img: event.img));
+  }
 }

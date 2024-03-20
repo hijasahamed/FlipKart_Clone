@@ -46,3 +46,17 @@ class HomeNavigateProductTileToFakeStoreListViewPageActionState extends HomeActi
 
   HomeNavigateProductTileToFakeStoreListViewPageActionState({required this.data, required this.size, required this.homebloc});
 }
+
+
+class NavigateToFakeStoreSingleProductPageActionState extends HomeActionState{
+final FakeStoreApiModel data;
+
+  NavigateToFakeStoreSingleProductPageActionState({required this.data});
+}
+
+
+class NavigateToElectroManiaSingleProductPageActionState extends HomeActionState{
+final ElectroManiacModel data;
+final String img;
+  NavigateToElectroManiaSingleProductPageActionState({required this.data,required this.img});
+}

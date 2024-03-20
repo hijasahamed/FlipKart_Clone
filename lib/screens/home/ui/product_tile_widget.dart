@@ -31,9 +31,7 @@ class ProductTileWidget extends StatelessWidget {
     return container == false
         ? GestureDetector(
           onTap: () {
-            if(circleIndex==7){
               Navigator.of(context).push(MaterialPageRoute(builder: (ctx){return  ListviewAllProducts(homeBloc: homeBloc,size: size,value: value,);}));
-            }
           },
           child: Column(
               children: [

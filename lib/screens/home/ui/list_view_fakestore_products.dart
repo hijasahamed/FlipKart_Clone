@@ -3,6 +3,7 @@ import 'package:flutter_bloc_tutorial_app/screens/home/bloc/home_bloc.dart';
 import 'package:flutter_bloc_tutorial_app/screens/home/models/fakestore_api_model.dart';
 import 'package:flutter_bloc_tutorial_app/screens/home/ui/app_bar_screen.dart';
 import 'package:flutter_bloc_tutorial_app/screens/home/ui/cosmetic_widget.dart';
+import 'package:flutter_bloc_tutorial_app/screens/home/ui/single_product_tile_widget.dart';
 
 class ListViewFakeStoreProducts extends StatelessWidget {
   final HomeBloc homeBloc;
@@ -28,8 +29,8 @@ class ListViewFakeStoreProducts extends StatelessWidget {
                 Stack(
                   children:[ 
                     GestureDetector(
-                      onTap: () {
-                        Navigator.push(context,MaterialPageRoute(builder: (context) =>  SingleCosmeticProduct(homeBloc: homeBloc,value: val,electroMania: false),));
+                      onTap: () {                        
+                        homeBloc.add(FakeStoreSingleProductPageNavigateEvent(data: val));
                       },
                       child: SizedBox(
                         height: size.height/5.8,

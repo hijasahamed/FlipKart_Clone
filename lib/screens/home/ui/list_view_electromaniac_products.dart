@@ -3,6 +3,7 @@ import 'package:flutter_bloc_tutorial_app/screens/home/bloc/home_bloc.dart';
 import 'package:flutter_bloc_tutorial_app/screens/home/models/electro_maniac_model.dart';
 import 'package:flutter_bloc_tutorial_app/screens/home/ui/app_bar_screen.dart';
 import 'package:flutter_bloc_tutorial_app/screens/home/ui/cosmetic_widget.dart';
+import 'package:flutter_bloc_tutorial_app/screens/home/ui/single_product_tile_widget.dart';
 List<String> images=[];
 class ListviewElectroManiacProducts extends StatelessWidget {
   final HomeBloc homeBloc;
@@ -30,7 +31,8 @@ class ListviewElectroManiacProducts extends StatelessWidget {
                   children:[ 
                     GestureDetector(
                       onTap: () {
-                        Navigator.push(context,MaterialPageRoute(builder: (context) =>  SingleCosmeticProduct(homeBloc: homeBloc,value: val,electroMania: true,img: image,),));
+                        
+                        homeBloc.add(ElectroManiacSingleProductPageNavigateEvent(data: val, img: image));
                       },
                       child: SizedBox(
                         height: size.height/5.8,
