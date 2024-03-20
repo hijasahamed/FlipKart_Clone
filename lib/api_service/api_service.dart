@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:flutter/foundation.dart';
-import 'package:flutter_bloc_tutorial_app/screens/home/models/all_product_api_model.dart';
+import 'package:flutter_bloc_tutorial_app/screens/home/models/all_product_category_api_model.dart';
 import 'package:flutter_bloc_tutorial_app/screens/home/models/electro_maniac_model.dart';
 import 'package:flutter_bloc_tutorial_app/screens/home/models/fakestore_api_model.dart';
 import 'package:flutter_bloc_tutorial_app/screens/home/ui/list_view_electromaniac_products.dart';
@@ -54,15 +54,15 @@ Future <List<ElectroManiacModel>> electroManiaDataFetch() async {
 }
 
 
-Future<List<AllProductApiModel>> allProductApiDataFetching()async{
-  List<AllProductApiModel> res=[];
+Future<List<AllProductCategoryApiModel>> allProductApiDataFetching()async{
+  List<AllProductCategoryApiModel> res=[];
   try{
     const url='https://api.escuelajs.co/api/v1/categories';
   Uri uri=Uri.parse(url);
   final response=await http.get(uri);
   // print('Hijas Hijas all products ${response.body}');
   final json=jsonDecode(response.body)as List;
-   res=json.map((e) => AllProductApiModel.fromjson(e)).toList();
+   res=json.map((e) => AllProductCategoryApiModel.fromjson(e)).toList();
   //  allProductImage(json);
   } catch (e){
     if(kDebugMode){

@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc_tutorial_app/screens/home/bloc/home_bloc.dart';
 import 'package:flutter_bloc_tutorial_app/screens/home/models/home_product_data_model.dart';
-import 'package:flutter_bloc_tutorial_app/screens/home/ui/list_view_allproducts.dart';
-import 'package:flutter_bloc_tutorial_app/screens/home/ui/list_view_electromaniac_products.dart';
-import 'package:flutter_bloc_tutorial_app/screens/home/ui/list_view_fakestore_products.dart';
 
 class ProductTileWidget extends StatelessWidget {
   final HomeBloc homeBloc;
@@ -31,7 +28,7 @@ class ProductTileWidget extends StatelessWidget {
     return container == false
         ? GestureDetector(
           onTap: () {
-              Navigator.of(context).push(MaterialPageRoute(builder: (ctx){return  ListviewAllProducts(homeBloc: homeBloc,size: size,value: value,);}));
+              homeBloc.add(NavigateToAllProductCategoryPageEvent(data: value));
           },
           child: Column(
               children: [
@@ -70,9 +67,6 @@ class ProductTileWidget extends StatelessWidget {
                         data: value, size: size, homeBloc: homeBloc));
               }
               if(isFakeStoreListView==true){
-                // Navigator.of(context).push(MaterialPageRoute(builder: (context) {
-                //   return ListViewFakeStoreProducts(homeBloc: homeBloc, size: size, value: value);
-                // },));
                 homeBloc.add(HomeNavigateProductTileToFakeStoreListViewPageEvent(data:value,homeBloc: homeBloc,size: size ));
               }
             },

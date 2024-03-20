@@ -2,9 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc_tutorial_app/screens/home/bloc/home_bloc.dart';
 import 'package:flutter_bloc_tutorial_app/screens/home/models/fakestore_api_model.dart';
 import 'package:flutter_bloc_tutorial_app/screens/home/ui/app_bar_screen.dart';
-import 'package:flutter_bloc_tutorial_app/screens/home/ui/cosmetic_widget.dart';
-import 'package:flutter_bloc_tutorial_app/screens/home/ui/single_product_tile_widget.dart';
-
 class ListViewFakeStoreProducts extends StatelessWidget {
   final HomeBloc homeBloc;
   final HomeLoadedSuccessState value;

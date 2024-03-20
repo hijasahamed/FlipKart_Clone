@@ -1,28 +1,22 @@
 import 'dart:async';
-
 import 'package:bloc/bloc.dart';
-
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc_tutorial_app/api_service/api_service.dart';
-
 import 'package:flutter_bloc_tutorial_app/data/grocery_data.dart';
 import 'package:flutter_bloc_tutorial_app/data/purchase_products.dart';
-import 'package:flutter_bloc_tutorial_app/screens/home/models/all_product_api_model.dart';
+import 'package:flutter_bloc_tutorial_app/screens/home/models/all_product_category_api_model.dart';
 import 'package:flutter_bloc_tutorial_app/screens/home/models/api_model.dart';
 import 'package:flutter_bloc_tutorial_app/screens/home/models/electro_maniac_model.dart';
 import 'package:flutter_bloc_tutorial_app/screens/home/models/fakestore_api_model.dart';
-
 import 'package:flutter_bloc_tutorial_app/screens/home/models/home_product_data_model.dart';
-
-import 'package:meta/meta.dart';
-
 part 'home_event.dart';
-
 part 'home_state.dart';
+
 
 class HomeBloc extends Bloc<HomeEvent, HomeState> {
   HomeBloc() : super(HomeInitial()) {
+
     on<HomeInitialEvent>(homeInitialEvent);
 
     on<HomeProductWishlistButtonClickedEvent>(
@@ -46,6 +40,8 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
      on<FakeStoreSingleProductPageNavigateEvent>(fakeStoreSingleProductPageNavigateEvent);  
 
      on<ElectroManiacSingleProductPageNavigateEvent>(electroManiacSingleProductPageNavigateEvent);
+
+     on<NavigateToAllProductCategoryPageEvent>(navigateToAllProductCategoryPageEvent);
 
   }
 
@@ -146,5 +142,9 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
 
   FutureOr<void> electroManiacSingleProductPageNavigateEvent(ElectroManiacSingleProductPageNavigateEvent event, Emitter<HomeState> emit) {
     emit(NavigateToElectroManiaSingleProductPageActionState(data: event.data, img: event.img));
+  }
+
+  FutureOr<void> navigateToAllProductCategoryPageEvent(NavigateToAllProductCategoryPageEvent event, Emitter<HomeState> emit) {
+    emit(NavigateToAllProductCategoryPageActionState(data: event.data));
   }
 }

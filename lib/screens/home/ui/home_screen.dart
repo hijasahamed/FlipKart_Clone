@@ -6,6 +6,7 @@ import 'package:flutter_bloc_tutorial_app/screens/home/cart/ui/cart_screen.dart'
 import 'package:flutter_bloc_tutorial_app/screens/home/ui/app_bar_screen.dart';
 import 'package:flutter_bloc_tutorial_app/screens/home/ui/cosmetic_widget.dart';
 import 'package:flutter_bloc_tutorial_app/screens/home/ui/carousel_slider_screen.dart';
+import 'package:flutter_bloc_tutorial_app/screens/home/ui/list_view_allproducts_category.dart';
 import 'package:flutter_bloc_tutorial_app/screens/home/ui/list_view_electromaniac_products.dart';
 import 'package:flutter_bloc_tutorial_app/screens/home/ui/list_view_fakestore_products.dart';
 import 'package:flutter_bloc_tutorial_app/screens/home/ui/lottie_watch_screen.dart';
@@ -35,6 +36,7 @@ class _HomeScreenState extends State<HomeScreen> {
     electroManiaDataFetch();
     fetchFakeStoreApiData();
     allProductApiDataFetching();
+    final mQuerySize = MediaQuery.sizeOf(context);
     return BlocConsumer<HomeBloc, HomeState>(
       bloc: homeBloc,
       listenWhen: (previous, current) => current is HomeActionState,
@@ -96,6 +98,12 @@ class _HomeScreenState extends State<HomeScreen> {
                     value: state.data,
                     electroMania: true,
                     img: state.img),
+              ));
+        } else if(state is NavigateToAllProductCategoryPageActionState){
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => ListviewAllProductsCategory(homeBloc: homeBloc, size: mQuerySize, value: state.data)
               ));
         }
       },

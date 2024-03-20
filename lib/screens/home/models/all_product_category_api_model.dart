@@ -1,10 +1,10 @@
-class AllProductApiModel{
+class AllProductCategoryApiModel{
   int id;
   String name;
   String price;
   String description;
   String imageUrl;
-  AllProductApiModel(
+  AllProductCategoryApiModel(
       {required this.name,
       required this.id,
       required this.price,
@@ -12,7 +12,7 @@ class AllProductApiModel{
       required this.imageUrl
       });
 
-  factory AllProductApiModel.fromjson(Map json) => AllProductApiModel(
+  factory AllProductCategoryApiModel.fromjson(Map json) => AllProductCategoryApiModel(
       id: json['id'],
       name: json['name'].toString(),
       price: json['updatedAt'].toString(),

@@ -14,8 +14,8 @@ class HomeWishlistNavigateEvent extends HomeEvent{ }
 class HomeCartNavigateEvent extends HomeEvent{}
 
 class HomeCosmeticSingleProductPageNavigateEvent extends HomeEvent{
-final ApiModel data;
-HomeCosmeticSingleProductPageNavigateEvent({required this.data});
+  final ApiModel data;
+  HomeCosmeticSingleProductPageNavigateEvent({required this.data});
 }
 
 class HomeNavigateProductTileToElectroManiacListViewPageEvent extends HomeEvent{
@@ -34,13 +34,19 @@ class HomeNavigateProductTileToFakeStoreListViewPageEvent extends HomeEvent{
 
 
 class FakeStoreSingleProductPageNavigateEvent extends HomeEvent{
-final FakeStoreApiModel data;
-FakeStoreSingleProductPageNavigateEvent({required this.data});
+  final FakeStoreApiModel data;
+  FakeStoreSingleProductPageNavigateEvent({required this.data});
 }
 
 
 class ElectroManiacSingleProductPageNavigateEvent extends HomeEvent{
-final ElectroManiacModel data;
-final String img;
-ElectroManiacSingleProductPageNavigateEvent({required this.data,required this.img});
+  final ElectroManiacModel data;
+  final String img;
+  ElectroManiacSingleProductPageNavigateEvent({required this.data,required this.img});
+}
+
+class NavigateToAllProductCategoryPageEvent extends HomeEvent{
+  final HomeLoadedSuccessState data;
+
+  NavigateToAllProductCategoryPageEvent({required this.data});
 }
