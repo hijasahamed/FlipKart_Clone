@@ -10,14 +10,18 @@ class HomeProductWishlistButtonClickedEvent extends HomeEvent{
   HomeProductWishlistButtonClickedEvent({required this.clickedProduct,});
 }
 
-class HomeProductCartButtonClickedEvent extends HomeEvent{  }
+class HomeProductCartButtonClickedEvent extends HomeEvent{
+  final FakeStoreApiModel clickedProduct;
+
+  HomeProductCartButtonClickedEvent({required this.clickedProduct});
+}
 
 class HomeWishlistNavigateEvent extends HomeEvent{ }
 
 class HomeCartNavigateEvent extends HomeEvent{}
 
 
-// *****************************************************
+
 
 class HomeCosmeticSingleProductPageNavigateEvent extends HomeEvent{
   final ApiModel data;

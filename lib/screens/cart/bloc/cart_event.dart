@@ -1,4 +1,13 @@
 part of 'cart_bloc.dart';
 
 @immutable
-sealed class CartEvent {}
+abstract class CartEvent {}
+
+class CartInitialEvent extends CartEvent{}
+
+
+class RemoveFromCartEvent extends CartEvent{
+  final FakeStoreApiModel removeValue;
+
+  RemoveFromCartEvent({required this.removeValue});
+}

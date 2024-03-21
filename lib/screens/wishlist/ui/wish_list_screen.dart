@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_bloc_tutorial_app/screens/cart/bloc/cart_bloc.dart';
 import 'package:flutter_bloc_tutorial_app/screens/home/models/fakestore_api_model.dart';
 import 'package:flutter_bloc_tutorial_app/screens/wishlist/bloc/wishlist_bloc.dart';
 import 'package:flutter_bloc_tutorial_app/screens/wishlist/ui/wishlist_tile.dart';
 
-List<FakeStoreApiModel> wishListItems=[];
+
 
 class WishlistScreen extends StatefulWidget {
   const WishlistScreen({super.key});
@@ -40,6 +41,9 @@ class _WishlistScreenState extends State<WishlistScreen> {
         listenWhen: (previous, current) => current is WishlistActionState,
         buildWhen: (previous, current) => current is !WishlistActionState,
         builder:(context, state) {
+          // if(cartItems.isEmpty){
+          //   return const Center(child: Text('No items Added',style: TextStyle(fontWeight: FontWeight.bold),));
+          // }
           switch (state.runtimeType){
             case WishlistSuccesState:
             final successState =state as WishlistSuccesState;

@@ -110,6 +110,9 @@ class _HomeScreenState extends State<HomeScreen> {
         else if (state is ItemAddedToWishlistActionState){
           snackbarMessage('Added to wishlist', context);
         }
+        else if(state is ItemAddedToCartActionState){
+          snackbarMessage('Added to Cart', context);
+        }
       },
       builder: (context, state) {
         switch (state.runtimeType) {
@@ -161,14 +164,6 @@ class _HomeScreenState extends State<HomeScreen> {
                       LottieWidgetScreen(size: mediaQuerySize),
                       const Divider(),
                       ProductTileWidget(
-                        productDataModel: successState.purchasedProducts[4],
-                        container: true,
-                        isElectroManiaclistViewScreen: true,
-                        homeBloc: homeBloc,
-                        size: mediaQuerySize,
-                        value: successState,
-                      ),
-                      ProductTileWidget(
                         productDataModel: successState.purchasedProducts[3],
                         container: true,
                         homeBloc: homeBloc,
@@ -176,6 +171,14 @@ class _HomeScreenState extends State<HomeScreen> {
                         isFakeStoreListView: true,
                         value: successState,
                       ),
+                      ProductTileWidget(
+                        productDataModel: successState.purchasedProducts[4],
+                        container: true,
+                        isElectroManiaclistViewScreen: true,
+                        homeBloc: homeBloc,
+                        size: mediaQuerySize,
+                        value: successState,
+                      ),                     
                       Container(
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10),

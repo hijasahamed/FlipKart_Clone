@@ -60,10 +60,8 @@ Future<List<AllProductCategoryApiModel>> allProductApiDataFetching()async{
     const url='https://api.escuelajs.co/api/v1/categories';
   Uri uri=Uri.parse(url);
   final response=await http.get(uri);
-  // print('Hijas Hijas all products ${response.body}');
   final json=jsonDecode(response.body)as List;
    res=json.map((e) => AllProductCategoryApiModel.fromjson(e)).toList();
-  //  allProductImage(json);
   } catch (e){
     if(kDebugMode){
       print(e);

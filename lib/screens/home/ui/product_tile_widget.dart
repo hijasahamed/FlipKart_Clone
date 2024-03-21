@@ -73,7 +73,7 @@ class ProductTileWidget extends StatelessWidget {
             child: Column(
               children: [
                 Container(
-                  height: size.height / 4.2,
+                  height: size.height / 3.8,
                   width: size.width,
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(5),

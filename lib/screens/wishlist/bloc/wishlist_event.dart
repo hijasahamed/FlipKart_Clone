@@ -7,6 +7,9 @@ class WishListInitialEvent extends WishlistEvent{
 
 }
 
-class RemoveFromWishlist extends WishlistEvent{
+class RemoveFromWishlistEvent extends WishlistEvent{
+  final FakeStoreApiModel removeValue;
+
+  RemoveFromWishlistEvent({required this.removeValue});
   
 }

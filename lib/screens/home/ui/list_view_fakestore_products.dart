@@ -63,13 +63,23 @@ class ListViewFakeStoreProducts extends StatelessWidget {
                       ),
                     ),
                     Positioned( 
-                      left: 350,
+                      left: 300,
                       top: 105,
-                      child: IconButton(
-                        onPressed: (){
-                          homeBloc.add(HomeProductWishlistButtonClickedEvent(clickedProduct: val,));
-                        }, 
-                        icon: const Icon(Icons.favorite_border,color: Colors.grey,)
+                      child: Row(
+                        children: [
+                          IconButton(
+                            onPressed: (){
+                              homeBloc.add(HomeProductWishlistButtonClickedEvent(clickedProduct: val,));
+                            }, 
+                            icon: const Icon(Icons.favorite_border,color: Colors.grey,)
+                          ),
+                          IconButton(
+                            onPressed: (){
+                              homeBloc.add(HomeProductCartButtonClickedEvent(clickedProduct: val));
+                            }, 
+                            icon: const Icon(Icons.shopping_cart_outlined,color: Colors.grey,)
+                          ),
+                        ],
                       )
                     )
                   ]

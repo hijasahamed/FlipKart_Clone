@@ -1,17 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc_tutorial_app/screens/cart/bloc/cart_bloc.dart';
 import 'package:flutter_bloc_tutorial_app/screens/home/models/fakestore_api_model.dart';
-import 'package:flutter_bloc_tutorial_app/screens/wishlist/bloc/wishlist_bloc.dart';
-import 'package:flutter_bloc_tutorial_app/screens/wishlist/ui/wish_list_screen.dart';
 
-class WishlistTile extends StatelessWidget {
-  final WishlistBloc wishlistBlock;
+class CartTile extends StatelessWidget {
+  final CartBloc cartBlock;
   final FakeStoreApiModel value;
   final Size size;
-  const WishlistTile(
-      {super.key,
-      required this.wishlistBlock,
-      required this.value,
-      required this.size});
+  const CartTile({super.key,required this.cartBlock,required this.size,required this.value});
 
   @override
   Widget build(BuildContext context) {
@@ -60,11 +55,11 @@ class WishlistTile extends StatelessWidget {
                     ],
                   )),
               Positioned(
-                  left: 330,
+                  left: 350,
                   top: 105,
                   child: IconButton(
                       onPressed: () {
-                        wishlistBlock.add(RemoveFromWishlistEvent(removeValue: value));
+                        cartBlock.add(RemoveFromCartEvent(removeValue: value));
                       },
                       icon: const Icon(
                         Icons.delete,

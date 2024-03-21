@@ -13,3 +13,10 @@ class WishlistSuccesState extends WishlistState {
 
   WishlistSuccesState({required this.wishlistItems});
 }
+
+
+class ItemRemovedFromWishListActionState extends WishlistActionState{
+  final FakeStoreApiModel data;
+
+  ItemRemovedFromWishListActionState({required this.data});
+}
