@@ -10,6 +10,7 @@ import 'package:flutter_bloc_tutorial_app/screens/home/models/api_model.dart';
 import 'package:flutter_bloc_tutorial_app/screens/home/models/electro_maniac_model.dart';
 import 'package:flutter_bloc_tutorial_app/screens/home/models/fakestore_api_model.dart';
 import 'package:flutter_bloc_tutorial_app/screens/home/models/home_product_data_model.dart';
+import 'package:flutter_bloc_tutorial_app/screens/wishlist/ui/wish_list_screen.dart';
 part 'home_event.dart';
 part 'home_state.dart';
 
@@ -85,14 +86,16 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   FutureOr<void> homeProductWishlistButtonClickedEvent(
       HomeProductWishlistButtonClickedEvent event, Emitter<HomeState> emit) {
     if (kDebugMode) {
-      print('Product added to wishlisted');
+      print('wishlist button clicked');
     }
+    wishListItems.add(event.clickedProduct);
+    emit(ItemAddedToWishlistActionState());
   }
 
   FutureOr<void> homeProductCartButtonClickedEvent(
       HomeProductCartButtonClickedEvent event, Emitter<HomeState> emit) {
     if (kDebugMode) {
-      print('Product added to Cart');
+      print('cart button clicked');
     }
   }
 

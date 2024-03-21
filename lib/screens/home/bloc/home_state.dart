@@ -24,11 +24,19 @@ class HomeErrorState extends HomeState{}
 
 class HomeNavigateToWishListPageActionState extends HomeActionState{}
 
+class ItemAddedToWishlistActionState extends HomeActionState{
+
+}
+
 class HomeNavigateToCartPageActionState extends HomeActionState{}
 
+class ItemAddedToCartActionState extends HomeActionState{
+
+}
+
 class HomeNavigateToCosmeticSingleProductPageActionState extends HomeActionState{
-final ApiModel data;
-  HomeNavigateToCosmeticSingleProductPageActionState({required this.data});
+  final ApiModel data;
+    HomeNavigateToCosmeticSingleProductPageActionState({required this.data});
 }
 
 class HomeNavigateProductTileToElectroManiacListViewPageActionState extends HomeActionState{
@@ -60,6 +68,5 @@ final String img;
 
 class NavigateToAllProductCategoryPageActionState extends HomeActionState{
   final HomeLoadedSuccessState data;
-
   NavigateToAllProductCategoryPageActionState({required this.data});
 }

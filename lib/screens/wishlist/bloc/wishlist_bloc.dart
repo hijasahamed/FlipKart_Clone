@@ -1,13 +1,19 @@
+import 'dart:async';
+
 import 'package:bloc/bloc.dart';
-import 'package:meta/meta.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc_tutorial_app/screens/home/models/fakestore_api_model.dart';
+import 'package:flutter_bloc_tutorial_app/screens/wishlist/ui/wish_list_screen.dart';
 
 part 'wishlist_event.dart';
 part 'wishlist_state.dart';
 
 class WishlistBloc extends Bloc<WishlistEvent, WishlistState> {
   WishlistBloc() : super(WishlistInitial()) {
-    on<WishlistEvent>((event, emit) {
-      // TODO: implement event handler
-    });
+    on<WishListInitialEvent>(wishListInitialEvent);
+  }
+
+  FutureOr<void> wishListInitialEvent(WishListInitialEvent event, Emitter<WishlistState> emit) {
+    emit(WishlistSuccesState(wishlistItems: wishListItems));
   }
 }

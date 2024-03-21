@@ -10,6 +10,7 @@ class ListViewFakeStoreProducts extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    
     return Scaffold(
       appBar: MyAppBar(homeBloc: homeBloc, buttonsOn: false),
       body: ListView.builder(        
@@ -65,7 +66,9 @@ class ListViewFakeStoreProducts extends StatelessWidget {
                       left: 350,
                       top: 105,
                       child: IconButton(
-                        onPressed: (){}, 
+                        onPressed: (){
+                          homeBloc.add(HomeProductWishlistButtonClickedEvent(clickedProduct: val,));
+                        }, 
                         icon: const Icon(Icons.favorite_border,color: Colors.grey,)
                       )
                     )

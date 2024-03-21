@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_bloc_tutorial_app/api_service/api_service.dart';
 import 'package:flutter_bloc_tutorial_app/screens/home/bloc/home_bloc.dart';
-import 'package:flutter_bloc_tutorial_app/screens/home/cart/ui/cart_screen.dart';
+import 'package:flutter_bloc_tutorial_app/screens/cart/ui/cart_screen.dart';
 import 'package:flutter_bloc_tutorial_app/screens/home/ui/app_bar_screen.dart';
 import 'package:flutter_bloc_tutorial_app/screens/home/ui/cosmetic_widget.dart';
 import 'package:flutter_bloc_tutorial_app/screens/home/ui/carousel_slider_screen.dart';
@@ -12,6 +12,7 @@ import 'package:flutter_bloc_tutorial_app/screens/home/ui/list_view_fakestore_pr
 import 'package:flutter_bloc_tutorial_app/screens/home/ui/lottie_watch_screen.dart';
 import 'package:flutter_bloc_tutorial_app/screens/home/ui/product_tile_widget.dart';
 import 'package:flutter_bloc_tutorial_app/screens/home/ui/single_product_tile_widget.dart';
+import 'package:flutter_bloc_tutorial_app/screens/messages/scaffold_messenger.dart';
 import 'package:flutter_bloc_tutorial_app/screens/wishlist/ui/wish_list_screen.dart';
 import 'package:lottie/lottie.dart';
 
@@ -105,6 +106,9 @@ class _HomeScreenState extends State<HomeScreen> {
               MaterialPageRoute(
                 builder: (context) => ListviewAllProductsCategory(homeBloc: homeBloc, size: mQuerySize, value: state.data)
               ));
+        }
+        else if (state is ItemAddedToWishlistActionState){
+          snackbarMessage('Added to wishlist', context);
         }
       },
       builder: (context, state) {

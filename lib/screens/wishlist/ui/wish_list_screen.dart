@@ -1,10 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_bloc_tutorial_app/screens/home/models/fakestore_api_model.dart';
+import 'package:flutter_bloc_tutorial_app/screens/wishlist/bloc/wishlist_bloc.dart';
+import 'package:flutter_bloc_tutorial_app/screens/wishlist/ui/wishlist_tile.dart';
 
-class WishlistScreen extends StatelessWidget {
+List<FakeStoreApiModel> wishListItems=[];
+
+class WishlistScreen extends StatefulWidget {
   const WishlistScreen({super.key});
-
   @override
-  Widget build(BuildContext context) {
+  State<WishlistScreen> createState() => _WishlistScreenState();
+}
+class _WishlistScreenState extends State<WishlistScreen> {
+  final WishlistBloc wishlistBloc=WishlistBloc(); 
+  @override
+  void initState() {
+    wishlistBloc.add(WishListInitialEvent());
+    super.initState();
+  }
+  @override
+  Widget build(BuildContext context) { 
+    final size = MediaQuery.sizeOf(context);   
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
@@ -17,6 +33,31 @@ class WishlistScreen extends StatelessWidget {
           ),
         ),
         backgroundColor: Colors.yellow,
+      ),
+      body: BlocConsumer<WishlistBloc,WishlistState>(
+        bloc: wishlistBloc,
+        listener: (context, state) {},
+        listenWhen: (previous, current) => current is WishlistActionState,
+        buildWhen: (previous, current) => current is !WishlistActionState,
+        builder:(context, state) {
+          switch (state.runtimeType){
+            case WishlistSuccesState:
+            final successState =state as WishlistSuccesState;
+            return ListView.separated(
+              separatorBuilder: (context, index) => const Divider(),
+              itemCount: successState.wishlistItems.length,
+              itemBuilder: (context, index) {
+                return WishlistTile(
+                  wishlistBlock: wishlistBloc,
+                  value: successState.wishlistItems[index],
+                  size: size,
+                );
+              },
+              
+            );
+          }
+          return const SizedBox();
+        }, 
       ),
     );
   }
