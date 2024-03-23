@@ -63,13 +63,23 @@ class ListviewElectroManiacProducts extends StatelessWidget {
                       ),
                     ),
                     Positioned( 
-                      left: 350,
+                      left: 300,
                       top: 105,
-                      child: IconButton(
-                        onPressed: (){
-                          
-                        }, 
-                        icon: const Icon(Icons.favorite_border,color: Colors.grey,)
+                      child: Row(
+                        children: [
+                          IconButton(
+                            onPressed: (){
+                              
+                            }, 
+                            icon: const Icon(Icons.favorite_border,color: Colors.grey,)
+                          ),
+                          IconButton(
+                            onPressed: () {
+                              
+                            }, 
+                            icon: const Icon(Icons.shopping_cart_outlined,color: Colors.grey,)
+                          )
+                        ],
                       )
                     )
                   ]
