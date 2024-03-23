@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_bloc_tutorial_app/screens/cart/bloc/cart_bloc.dart';
-import 'package:flutter_bloc_tutorial_app/screens/home/models/fakestore_api_model.dart';
 import 'package:flutter_bloc_tutorial_app/screens/wishlist/bloc/wishlist_bloc.dart';
 import 'package:flutter_bloc_tutorial_app/screens/wishlist/ui/wishlist_tile.dart';
 
@@ -40,13 +38,13 @@ class _WishlistScreenState extends State<WishlistScreen> {
         listener: (context, state) {},
         listenWhen: (previous, current) => current is WishlistActionState,
         buildWhen: (previous, current) => current is !WishlistActionState,
-        builder:(context, state) {
-          // if(cartItems.isEmpty){
-          //   return const Center(child: Text('No items Added',style: TextStyle(fontWeight: FontWeight.bold),));
-          // }
+        builder:(context, state) {          
           switch (state.runtimeType){
             case WishlistSuccesState:
             final successState =state as WishlistSuccesState;
+            if(successState.wishlistItems.isEmpty){
+              return const Center(child: Text('No items in wishlist',style: TextStyle(fontWeight: FontWeight.bold),));
+            }
             return ListView.separated(
               separatorBuilder: (context, index) => const Divider(),
               itemCount: successState.wishlistItems.length,

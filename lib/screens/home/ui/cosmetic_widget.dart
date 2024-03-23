@@ -18,7 +18,7 @@ class CosmeticWidget extends StatelessWidget {
         shrinkWrap: true,
         itemCount: value.apiproducts.length - 1,
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            childAspectRatio: 1,
+            childAspectRatio: 1.52,
             mainAxisSpacing: 5,
             crossAxisSpacing: 5,
             crossAxisCount: 1),
