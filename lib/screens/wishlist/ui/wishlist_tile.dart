@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc_tutorial_app/screens/home/models/fakestore_api_model.dart';
 import 'package:flutter_bloc_tutorial_app/screens/wishlist/bloc/wishlist_bloc.dart';
-import 'package:flutter_bloc_tutorial_app/screens/wishlist/ui/wish_list_screen.dart';
 
 class WishlistTile extends StatelessWidget {
   final WishlistBloc wishlistBlock;
