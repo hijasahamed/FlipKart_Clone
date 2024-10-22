@@ -254,7 +254,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ),
             );
-          case HomeErrorState:
+          case HomeErrorState:  
             return const Scaffold(
               body: Center(
                 child: Text('Error'),

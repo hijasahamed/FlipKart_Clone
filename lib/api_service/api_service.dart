@@ -31,7 +31,7 @@ Future<List<FakeStoreApiModel>> fetchFakeStoreApiData() async {
   try {
     const url = 'https://fakestoreapi.com/products';
     Uri uri = Uri.parse(url);
-    final response = await http.get(uri);
+    final response = await http.get(uri,);
     final json = jsonDecode(response.body) as List;
     res = json.map((e) => FakeStoreApiModel.fromjson(e)).toList();
   } catch (e) {
